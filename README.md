@@ -4,7 +4,7 @@ Final Project for CS_554
 Project Description 
 
 
-We are going to create a Book Database website. The key features of the website would be:
+We are going to create a Book Database website. The key features :
 - Create an account
 - Login/Logout
 - Add a book 
