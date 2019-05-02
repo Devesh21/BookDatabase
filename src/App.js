@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import Home from "./components/Home.js";
 import Login from "./components/Login.js";
 import Logout from "./components/Logout.js";
 import { LinkContainer } from "react-router-bootstrap";
@@ -44,15 +45,10 @@ class App extends Component {
               </Form>
             </Navbar.Collapse>
           </Navbar>
-          <header className="App-header">
-            <div className="App-Title">
-              <h1 className="App-title">Your partner in learning</h1>
-              <p>Find and read books of your choice!</p>
-            </div>
-          </header>
           <div className="App-body">
             <table />
             <Switch>
+              <Route exact path="/" component={Home}/>
               <Route path="/login" component={Login} />
               <Route path="/logout" component={Logout} />
               <Route path="/SignUp" component={Logout} />
