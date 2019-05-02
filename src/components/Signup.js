@@ -1,14 +1,16 @@
-import React, { Component } from "react";
-import { Route, Switch } from "react-router-dom";
-import { Button, FormGroup, FormControl, ControlLabel, Form } from "react-bootstrap";
+import React, {Component} from "react";
+import {Route, Switch} from "react-router-dom";
+import {Button, Form, FormGroup} from "react-bootstrap";
 
-class Login extends Component {
+class Signup extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      username: "",
       email: "",
-      password: ""
+      password: "",
+      password2: ""
     };
   }
 
@@ -25,12 +27,23 @@ class Login extends Component {
   handleSubmit = event => {
     event.preventDefault();
   };
+
   render() {
     return (
-      <div className="Login">
+      <div className="Signup">
         <form onSubmit={this.handleSubmit}>
+          <FormGroup controlId="username" bsSize="large">
+            <Form.Label style={{"float": "left"}}>User Name</Form.Label>
+            <Form.Control
+              autoFocus
+              value={this.state.username}
+              onChange={this.handleChange}
+              type="text"
+              placeholder="Enter username"
+            />
+          </FormGroup>
           <FormGroup controlId="email" bsSize="large">
-            <Form.Label style={{"float" : "left"}}>Email address</Form.Label>
+            <Form.Label style={{"float": "left"}}>Email address</Form.Label>
             <Form.Control
               autoFocus
               value={this.state.email}
@@ -40,12 +53,21 @@ class Login extends Component {
             />
           </FormGroup>
           <FormGroup controlId="password" bsSize="large">
-            <Form.Label style={{"float" : "left"}}>Password</Form.Label>
+            <Form.Label style={{"float": "left"}}>Password</Form.Label>
             <Form.Control
               value={this.state.password}
               onChange={this.handleChange}
               type="password"
               placeholder="Password"
+            />
+          </FormGroup>
+          <FormGroup controlId="password2" bsSize="large">
+            <Form.Label style={{"float": "left"}}>Repeat Password</Form.Label>
+            <Form.Control
+              value={this.state.password2}
+              onChange={this.handleChange}
+              type="password"
+              placeholder="Repeat Password"
             />
           </FormGroup>
           <Button
@@ -54,11 +76,12 @@ class Login extends Component {
             disabled={!this.validateForm()}
             type="submit"
           >
-            Log In
+            Sign Up
           </Button>
         </form>
       </div>
     );
   }
 }
-export default Login;
+
+export default Signup;

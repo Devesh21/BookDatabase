@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import Home from "./components/Home.js";
 import Login from "./components/Login.js";
 import Logout from "./components/Logout.js";
-import SignUp from "./components/SignUp";
+import Signup from "./components/Signup.js";
 import { LinkContainer } from "react-router-bootstrap";
 import img from "./image/img.jpg";
 import {

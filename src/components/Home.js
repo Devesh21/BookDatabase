@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {Route, Switch} from "react-router-dom";
 import {Button, FormGroup, FormControl, ControlLabel, Container, Row, Col} from "react-bootstrap";
 import Login from "./Login.js";
-import Signup from "./SignUp.js";
+import Signup from "./Signup.js";
 
 class Home extends Component {
   constructor(props) {
