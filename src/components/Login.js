@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
-import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { Button, FormGroup, FormControl, ControlLabel, Form } from "react-bootstrap";
 
 class Login extends Component {
   constructor(props) {
@@ -30,18 +30,22 @@ class Login extends Component {
       <div className="Login">
         <form onSubmit={this.handleSubmit}>
           <FormGroup controlId="email" bsSize="large">
-            <FormControl
+            <Form.Label style={{"float" : "left"}}>Email address</Form.Label>
+            <Form.Control
               autoFocus
-              type="email"
               value={this.state.email}
               onChange={this.handleChange}
+              type="email"
+              placeholder="Enter email"
             />
           </FormGroup>
           <FormGroup controlId="password" bsSize="large">
-            <FormControl
+            <Form.Label style={{"float" : "left"}}>Password</Form.Label>
+            <Form.Control
               value={this.state.password}
               onChange={this.handleChange}
               type="password"
+              placeholder="Password"
             />
           </FormGroup>
           <Button

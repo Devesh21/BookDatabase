@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import Home from "./components/Home.js";
 import Login from "./components/Login.js";
 import Logout from "./components/Logout.js";
+import SignUp from "./components/SignUp";
 import { LinkContainer } from "react-router-bootstrap";
 import img from "./image/img.jpg";
 import {
@@ -28,11 +29,8 @@ class App extends Component {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="mr-auto">
-                <LinkContainer to="/signup">
-                  <Nav.Link>Signup</Nav.Link>
-                </LinkContainer>
-                <LinkContainer to="/login">
-                  <Nav.Link>Login</Nav.Link>
+                <LinkContainer to="/">
+                  <Nav.Link>Log In / Sign Up</Nav.Link>
                 </LinkContainer>
               </Nav>
               <Form inline>
@@ -49,9 +47,6 @@ class App extends Component {
             <table />
             <Switch>
               <Route exact path="/" component={Home}/>
-              <Route path="/login" component={Login} />
-              <Route path="/logout" component={Logout} />
-              <Route path="/SignUp" component={Logout} />
             </Switch>
           </div>
         </div>
