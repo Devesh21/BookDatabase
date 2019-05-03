@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {Button, Container, Row, Col} from "react-bootstrap";
-import Login from "./Home";
+import BookCover from "../image/BookCover.png"
 
 class UserHome extends Component {
   render() {
@@ -14,7 +14,10 @@ class UserHome extends Component {
             <Row>
               {
                 myBooks.map(function (bookName, index) {
-                  return <Col xs={6} md={4} lg={3} key={index}>{bookName}</Col>
+                  return <Col xs={6} md={4} lg={3} key={index}>
+                    <img src={BookCover} alt="BookCover"/>
+                    {bookName}
+                  </Col>
                 })
               }
             </Row>
@@ -22,7 +25,7 @@ class UserHome extends Component {
           <Col lg="3" style={{"border": "solid"}}>
             <h2>Favourite Books</h2>
             <Row>
-              { 
+              {
                 favouriteBooks.map(function (bookName, index) {
                   return <Col xs={6} md={4} lg={12} key={index}>{bookName}</Col>
                 })
