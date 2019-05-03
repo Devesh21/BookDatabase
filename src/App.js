@@ -1,19 +1,12 @@
 import React, {Component} from "react";
 import "./App.css";
 import {BrowserRouter as Router, Route, Link, Switch} from "react-router-dom";
+import {LinkContainer} from "react-router-bootstrap";
+import {Button, Navbar, Nav, Form, FormControl} from "react-bootstrap";
+
 import Home from "./components/Home.js";
 import UserHome from "./components/UserHome.js"
-import {LinkContainer} from "react-router-bootstrap";
-import img from "./image/img.jpg";
-import {
-  Button,
-  Navbar,
-  Nav,
-  NavItem,
-  NavDropdown,
-  Form,
-  FormControl
-} from "react-bootstrap";
+import Book from "./components/Book.js"
 
 class App extends Component {
   render() {
@@ -33,6 +26,9 @@ class App extends Component {
                 <LinkContainer to="/user">
                   <Nav.Link>User Home</Nav.Link>
                 </LinkContainer>
+                <LinkContainer to="/book">
+                  <Nav.Link>Book</Nav.Link>
+                </LinkContainer>
               </Nav>
               <Form inline>
                 <FormControl
@@ -48,6 +44,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={Home}/>
               <Route path="/user" component={UserHome}/>
+              <Route path="/book" component={Book}/>
             </Switch>
           </div>
         </div>

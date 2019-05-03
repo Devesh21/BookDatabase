@@ -18,9 +18,9 @@ class Home extends Component {
 
   render() {
     var text = this.state.login ? "Sign Up" : "Log In";
-    var show = this.state.login ? <Login/> : <Signup/>;
+    var loginSignup = this.state.login ? <Login/> : <Signup/>;
     return (
-      <Container style={{"max-width": "100%"}}>
+      <Container className="Home" style={{"max-width": "100%"}}>
         <Row>
           <Col>
             <header className="App-header">
@@ -31,7 +31,7 @@ class Home extends Component {
             </header>
           </Col>
           <Col lg="3">
-            {show}
+            {loginSignup}
             <Button block bsSize="large" onClick={this.handleClick}>
               {text}
             </Button>
