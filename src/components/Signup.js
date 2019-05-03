@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import {Route, Switch} from "react-router-dom";
 import {Button, Form, FormGroup} from "react-bootstrap";
 
 class Signup extends Component {

@@ -1,6 +1,5 @@
 import React, {Component} from "react";
-import {Route, Switch} from "react-router-dom";
-import {Button, FormGroup, FormControl, ControlLabel, Container, Row, Col} from "react-bootstrap";
+import {Button, Container, Row, Col} from "react-bootstrap";
 import Login from "./Login.js";
 import Signup from "./Signup.js";
 
@@ -19,7 +18,7 @@ class Home extends Component {
 
   render() {
     var text = this.state.login ? "Sign Up" : "Log In";
-    var show = this.state.login ? <Login/> : <Signup/>
+    var show = this.state.login ? <Login/> : <Signup/>;
     return (
       <Container style={{"max-width": "100%"}}>
         <Row>
