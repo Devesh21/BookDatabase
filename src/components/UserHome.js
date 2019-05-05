@@ -1,12 +1,22 @@
 import React, {Component} from "react";
-import {Button, Container, Row, Col} from "react-bootstrap";
+import { Container, Row, Col} from "react-bootstrap";
+import { Redirect } from 'react-router-dom';
 import Favourite from "./Favourite.js";
+import { connect } from 'react-redux';
+import { firestoreConnect } from 'react-redux-firebase';
+import { compose } from 'redux';
 
 class UserHome extends Component {
   render() {
+    const { auth } = this.props;
+
+    if(!auth.uid){
+      return (<Redirect to="/"></Redirect>)
+    }
+
     var myBooks = ['MyBook1', 'MyBook2', 'MyBook3', "MyBook4", "MyBook5", "MyBook6"];
     return (
-      <Container style={{"max-width": "100%"}}>
+      <Container style={{"maxWidth": "100%"}}>
         <Row>
           <Col style={{"border": "solid"}}>
             <h2>My Books</h2>
@@ -28,4 +38,17 @@ class UserHome extends Component {
   }
 }
 
-export default UserHome;
+
+const mapStateToProps = (state) => {
+  return {
+    books: state.books,
+    auth: state.firebase.auth
+  }
+}
+
+export default compose(
+  connect(mapStateToProps),
+  firestoreConnect([
+    {collection: 'books'}
+  ])
+)(UserHome);

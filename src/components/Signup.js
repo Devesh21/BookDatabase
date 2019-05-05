@@ -1,15 +1,18 @@
 import React, {Component} from "react";
 import {Button, Form, FormGroup} from "react-bootstrap";
+import { connect } from 'react-redux';
+import { signUp } from '../store/actions/authActions';
+
 
 class Signup extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      username: "",
+      firstName: "",
+      lastName: "",
       email: "",
-      password: "",
-      password2: ""
+      password: ""
     };
   }
 
@@ -25,33 +28,48 @@ class Signup extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    // console.log(this.state);
+    this.props.signUp(this.state);
   };
 
   render() {
+
+    const { authError } = this.props;
+
     return (
       <div className="Signup">
         <form onSubmit={this.handleSubmit}>
-          <FormGroup controlId="username" bsSize="large">
-            <Form.Label style={{"float": "left"}}>User Name</Form.Label>
+          <FormGroup controlId="firstName">
+            <Form.Label style={{"float": "left"}}>First Name</Form.Label>
             <Form.Control
               autoFocus
-              value={this.state.username}
+              value={this.state.firstName}
               onChange={this.handleChange}
               type="text"
-              placeholder="Enter username"
+              placeholder="First Name"
             />
           </FormGroup>
-          <FormGroup controlId="email" bsSize="large">
+          <FormGroup controlId="lastName">
+            <Form.Label style={{"float": "left"}}>Last Name</Form.Label>
+            <Form.Control
+              autoFocus
+              value={this.state.lastName}
+              onChange={this.handleChange}
+              type="text"
+              placeholder="Last Name"
+            />
+          </FormGroup>
+          <FormGroup controlId="email">
             <Form.Label style={{"float": "left"}}>Email address</Form.Label>
             <Form.Control
               autoFocus
               value={this.state.email}
               onChange={this.handleChange}
               type="email"
-              placeholder="Enter email"
+              placeholder="Email"
             />
           </FormGroup>
-          <FormGroup controlId="password" bsSize="large">
+          <FormGroup controlId="password">
             <Form.Label style={{"float": "left"}}>Password</Form.Label>
             <Form.Control
               value={this.state.password}
@@ -60,27 +78,36 @@ class Signup extends Component {
               placeholder="Password"
             />
           </FormGroup>
-          <FormGroup controlId="password2" bsSize="large">
-            <Form.Label style={{"float": "left"}}>Repeat Password</Form.Label>
-            <Form.Control
-              value={this.state.password2}
-              onChange={this.handleChange}
-              type="password"
-              placeholder="Repeat Password"
-            />
-          </FormGroup>
+          
           <Button
             block
-            bsSize="large"
             disabled={!this.validateForm()}
             type="submit"
           >
             Sign Up
           </Button>
+
+          <div className="error">
+            { authError ? <p>{authError}</p> : null}
+          </div>
+
         </form>
       </div>
     );
   }
 }
 
-export default Signup;
+const mapStateToProps = (state) => {
+  return {
+    auth: state.firebase.auth,
+    authError: state.auth.authError
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signUp: (newUser) => dispatch(signUp(newUser))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);

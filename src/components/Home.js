@@ -20,7 +20,7 @@ class Home extends Component {
     var text = this.state.login ? "Sign Up" : "Log In";
     var loginSignup = this.state.login ? <Login/> : <Signup/>;
     return (
-      <Container className="Home" style={{"max-width": "100%"}}>
+      <Container className="Home" style={{"maxWidth": "100%"}}>
         <Row>
           <Col>
             <header className="App-header">
@@ -32,7 +32,7 @@ class Home extends Component {
           </Col>
           <Col lg="3">
             {loginSignup}
-            <Button block bsSize="large" onClick={this.handleClick}>
+            <Button block onClick={this.handleClick}>
               {text}
             </Button>
           </Col>

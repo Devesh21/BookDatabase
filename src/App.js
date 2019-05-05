@@ -7,12 +7,15 @@ import {Button, Navbar, Nav, Form, FormControl} from "react-bootstrap";
 import Home from "./components/Home.js";
 import UserHome from "./components/UserHome.js"
 import Book from "./components/Book.js"
+import NavBar from './components/layout/Navbar';
+
 
 class App extends Component {
   render() {
     return (
       <Router>
         <div className="App">
+          <NavBar/>
           <Navbar bg="light" expand="lg">
             <Navbar.Brand>
               <Link to="/">BookMaster</Link>

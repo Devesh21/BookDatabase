@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Button, FormGroup, Form } from "react-bootstrap";
+import { connect } from 'react-redux';
+import { signIn } from '../../src/store/actions/authActions';
 
 class Login extends Component {
   constructor(props) {
@@ -23,12 +25,16 @@ class Login extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    console.log(this.state);
+    this.props.signIn(this.state);
   };
+
   render() {
+    const { authError } = this.props;
     return (
       <div className="Login">
         <form onSubmit={this.handleSubmit}>
-          <FormGroup controlId="email" bsSize="large">
+          <FormGroup controlId="email">
             <Form.Label style={{"float" : "left"}}>Email address</Form.Label>
             <Form.Control
               autoFocus
@@ -38,7 +44,7 @@ class Login extends Component {
               placeholder="Enter email"
             />
           </FormGroup>
-          <FormGroup controlId="password" bsSize="large">
+          <FormGroup controlId="password">
             <Form.Label style={{"float" : "left"}}>Password</Form.Label>
             <Form.Control
               value={this.state.password}
@@ -49,15 +55,30 @@ class Login extends Component {
           </FormGroup>
           <Button
             block
-            bsSize="large"
             disabled={!this.validateForm()}
             type="submit"
           >
             Log In
           </Button>
+          <div className="error">
+            { authError ? <p>{authError}</p> : null}
+          </div>
         </form>
       </div>
     );
   }
 }
-export default Login;
+
+const mapStateToProps = (state) => {
+  return {
+    authError: state.auth.authError
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signIn: (credentials) => dispatch(signIn(credentials))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
