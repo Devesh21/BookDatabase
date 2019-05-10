@@ -3,7 +3,14 @@ import { Link } from "react-router-dom";
 import SignedInLinks from "./SignedInLinks";
 import SignedOutLinks from "./SignedOutLinks";
 import { connect } from "react-redux";
-import { Button, Navbar, Nav, Form, FormControl } from "react-bootstrap";
+import {
+  Button,
+  Navbar,
+  Nav,
+  Form,
+  FormControl,
+  Dropdown
+} from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import Search from "./Search";
 
@@ -48,8 +55,23 @@ const BookMasterNavbar = props => {
             <Button variant="outline-success">Search</Button>
           </Link>
         </Form>
-        <Button>{links}</Button>
+        {/* <Button>{links}</Button> */}
       </Navbar.Collapse>
+      <br />
+      <br />
+      <Dropdown>
+        <Dropdown.Toggle variant="success" id="dropdown-basic">
+          Dropdown Button
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu>
+          {/* <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+          <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+          <Dropdown.Item href="#/action-3">Something else</Dropdown.Item> */}
+          {links}
+        </Dropdown.Menu>
+      </Dropdown>
+      ;
     </Navbar>
   );
 };
