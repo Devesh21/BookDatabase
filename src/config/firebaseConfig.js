@@ -5,17 +5,16 @@ import 'firebase/auth';
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
-    apiKey: "AIzaSyDQKrr_tKdg-oFvh9KcjwPYxQVdICQnr5g",
-    authDomain: "book-database-c3a02.firebaseapp.com",
-    databaseURL: "https://book-database-c3a02.firebaseio.com",
-    projectId: "book-database-c3a02",
-    storageBucket: "book-database-c3a02.appspot.com",
-    messagingSenderId: "900061462876",
-    appId: "1:900061462876:web:f3f7d00c0aff1b5e"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  firebase.firestore();
+  apiKey: "AIzaSyBB44d9OffYElzhYADHtgOJSlbvVpql_NM",
+  authDomain: "bookdatabase-4b8ea.firebaseapp.com",
+  databaseURL: "https://bookdatabase-4b8ea.firebaseio.com",
+  projectId: "bookdatabase-4b8ea",
+  storageBucket: "bookdatabase-4b8ea.appspot.com",
+  messagingSenderId: "1058660854900",
+  appId: "1:1058660854900:web:381bac5a4c865552"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+firebase.firestore();
 
-
-  export default firebase;
+export default firebase;
