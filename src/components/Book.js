@@ -12,7 +12,7 @@ class Book extends Component {
       description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab amet consectetur delectus, dolorem eligendi explicabo iste iusto laborum, laudantium maxime modi nostrum numquam obcaecati officiis quo, similique sint tempora?",
       rating: 5,
       image: "BookCover.png"
-    };
+    };// the book's thumbnail needs to be pulled from the first page of the book's pdf
   }
 
   render() {

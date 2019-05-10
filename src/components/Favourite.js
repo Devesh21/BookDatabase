@@ -3,6 +3,8 @@ import {Col, Row} from "react-bootstrap";
 
 class Favourite extends Component {
   render() {
+    // this needs to be data pulled from the active user's database entry
+    // each book in the list needs to be a link to the corresponding book's page
     var favouriteBooks = ['FavBook1', 'FavBook2', 'FavBook3', "FavBook4", "FavBook5", "FavBook6"];
     return (
       <Col className="Favourite" lg="3" style={{"border": "solid"}}>
