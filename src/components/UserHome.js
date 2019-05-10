@@ -10,6 +10,9 @@ class UserHome extends Component {
   render() {
     const { auth } = this.props;
 
+    console.log("in userHome: ", this.props);
+    
+    
     if(!auth.uid){
       return (<Redirect to="/"></Redirect>)
     }
@@ -42,7 +45,8 @@ class UserHome extends Component {
 const mapStateToProps = (state) => {
   return {
     books: state.books,
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
+    profile: state.firebase.profile
   }
 }
 
