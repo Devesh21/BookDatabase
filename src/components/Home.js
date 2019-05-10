@@ -2,6 +2,8 @@ import React, {Component} from "react";
 import {Button, Container, Row, Col} from "react-bootstrap";
 import Login from "./Login.js";
 import Signup from "./Signup.js";
+import Favourite from "./Favourite";
+import {connect} from "react-redux";
 
 class Home extends Component {
   constructor(props) {
@@ -9,7 +11,7 @@ class Home extends Component {
     this.state = {
       login: true
     };
-    this.handleClick = this.handleClick.bind(this)
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(event) {
@@ -42,4 +44,10 @@ class Home extends Component {
   }
 }
 
-export default Home;
+const mapStateToProps = state => {
+  return {
+    auth: state.firebase.auth,
+  };
+};
+
+export default connect(mapStateToProps)(Home);

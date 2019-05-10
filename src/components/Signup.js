@@ -102,12 +102,12 @@ const mapStateToProps = (state) => {
     auth: state.firebase.auth,
     authError: state.auth.authError
   }
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
     signUp: (newUser) => dispatch(signUp(newUser))
   }
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signup);

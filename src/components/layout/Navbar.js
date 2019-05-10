@@ -71,7 +71,6 @@ const BookMasterNavbar = props => {
           {links}
         </Dropdown.Menu>
       </Dropdown>
-      ;
     </Navbar>
   );
 };

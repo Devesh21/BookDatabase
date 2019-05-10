@@ -7,22 +7,22 @@ class ReadBook extends Component {
     state = {
         numPages: null,
         pageNumber: 1
-    }
+    };
 
     goToPrevPage = () => {
         if (state.pageNumber > 1) {
             this.setState(state => ({ pageNumber: state.pageNumber - 1 }));
         }
-    }
+    };
     goToNextPage = () => {
         if (state.pageNumber < state.numPages) {
             this.setState(state => ({ pageNumber: state.pageNumber + 1}));
         }
-    }
+    };
 
     onDocumentLoadSuccess = ({ numPages }) => {
         this.setState({ numPages });
-    }
+    };
 
     render() {
         const { pageNumber, numPages } = this.state;

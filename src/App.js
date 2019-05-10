@@ -9,6 +9,7 @@ import UserHome from "./components/UserHome.js";
 import Book from "./components/Book.js";
 import NavBar from "./components/layout/Navbar";
 import Search from "./components/layout/Search";
+import AddBook from "./components/AddBook";
 
 class App extends Component {
   render() {
@@ -21,7 +22,8 @@ class App extends Component {
               <Route exact path="/" component={Home} />
               <Route path="/user" component={UserHome} />
               <Route path="/book" component={Book} />
-              <Route path="/Search" component={Search} />
+              <Route path="/search" component={Search} />
+              <Route path="/addbook" component={AddBook} />
             </Switch>
           </div>
         </div>

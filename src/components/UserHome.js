@@ -14,7 +14,7 @@ class UserHome extends Component {
     
     
     if(!auth.uid){
-      return (<Redirect to="/"></Redirect>)
+      return (<Redirect to="/"/>)
     }
 
     var myBooks = ['MyBook1', 'MyBook2', 'MyBook3', "MyBook4", "MyBook5", "MyBook6"];

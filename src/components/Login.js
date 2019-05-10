@@ -73,12 +73,12 @@ const mapStateToProps = (state) => {
   return {
     authError: state.auth.authError
   }
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
     signIn: (credentials) => dispatch(signIn(credentials))
   }
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
