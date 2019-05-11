@@ -1,8 +1,7 @@
-import React, {Component} from "react";
-import {Button, Form, FormGroup} from "react-bootstrap";
-import { connect } from 'react-redux';
-import { signUp } from '../store/actions/authActions';
-
+import React, { Component } from "react";
+import { Button, Form, FormGroup } from "react-bootstrap";
+import { connect } from "react-redux";
+import { signUp } from "../store/actions/authActions";
 
 class Signup extends Component {
   constructor(props) {
@@ -30,17 +29,17 @@ class Signup extends Component {
     event.preventDefault();
     // console.log(this.state);
     this.props.signUp(this.state);
+    this.props.history.push("/user");
   };
 
   render() {
-
     const { authError } = this.props;
 
     return (
       <div className="Signup">
         <form onSubmit={this.handleSubmit}>
           <FormGroup controlId="firstName">
-            <Form.Label style={{"float": "left"}}>First Name</Form.Label>
+            <Form.Label style={{ float: "left" }}>First Name</Form.Label>
             <Form.Control
               autoFocus
               value={this.state.firstName}
@@ -50,7 +49,7 @@ class Signup extends Component {
             />
           </FormGroup>
           <FormGroup controlId="lastName">
-            <Form.Label style={{"float": "left"}}>Last Name</Form.Label>
+            <Form.Label style={{ float: "left" }}>Last Name</Form.Label>
             <Form.Control
               autoFocus
               value={this.state.lastName}
@@ -60,7 +59,7 @@ class Signup extends Component {
             />
           </FormGroup>
           <FormGroup controlId="email">
-            <Form.Label style={{"float": "left"}}>Email address</Form.Label>
+            <Form.Label style={{ float: "left" }}>Email address</Form.Label>
             <Form.Control
               autoFocus
               value={this.state.email}
@@ -70,7 +69,7 @@ class Signup extends Component {
             />
           </FormGroup>
           <FormGroup controlId="password">
-            <Form.Label style={{"float": "left"}}>Password</Form.Label>
+            <Form.Label style={{ float: "left" }}>Password</Form.Label>
             <Form.Control
               value={this.state.password}
               onChange={this.handleChange}
@@ -78,36 +77,32 @@ class Signup extends Component {
               placeholder="Password"
             />
           </FormGroup>
-          
-          <Button
-            block
-            disabled={!this.validateForm()}
-            type="submit"
-          >
+
+          <Button block disabled={!this.validateForm()} type="submit">
             Sign Up
           </Button>
 
-          <div className="error">
-            { authError ? <p>{authError}</p> : null}
-          </div>
-
+          <div className="error">{authError ? <p>{authError}</p> : null}</div>
         </form>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     auth: state.firebase.auth,
     authError: state.auth.authError
-  }
+  };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    signUp: (newUser) => dispatch(signUp(newUser))
-  }
+    signUp: newUser => dispatch(signUp(newUser))
+  };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Signup);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Signup);
