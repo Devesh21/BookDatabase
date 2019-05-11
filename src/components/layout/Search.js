@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
+import BookCard from "../Bookcard";
+import { Card, Container, Row, Col } from "react-bootstrap";
 
 class SearchBooks extends Component {
   constructor(props) {
@@ -63,6 +65,25 @@ class SearchBooks extends Component {
     } else return null;
   }
 
+  // bookItems(rowNo, rowSize) {
+  //   if (this.state.searchData != null && this.state.searchData.items != null) {
+  //     return this.state.searchData.items.filter((book, index) => {
+  //       let start = rowNo * rowSize;
+  //       let end = start + rowSize;
+  //       return index >= start && index < end;
+  //     });
+  //   }
+  //   return [];
+  // }
+
+  // getArray(n) {
+  //   let ret = [];
+  //   for (let i = 0; i < n; i++) {
+  //     ret.push(i);
+  //   }
+  //   return ret;
+  // }
+
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.match.params.page !== this.props.match.params.page) {
       this.searchBooks();
@@ -86,12 +107,24 @@ class SearchBooks extends Component {
       this.state.searchData.items.map(book => {
         // let book = books.book;
 
-        return (
-          <li key={book.id}>
-            <Link to={`/books/${book.id}`}>{book.volumeInfo.title}</Link>
-          </li>
-        );
+        return <BookCard key={book.id} book={book} />;
       });
+
+    // let cols = (rowNo, rowSize) => {
+    //   this.bookItems(rowNo, rowSize).map(book => {
+    //     return <Col xs={4}>{book.id}</Col>;
+    //   });
+    // };
+    // let rows = this.getArray(7).map(rowNo => {
+    //   return <Row>{cols(rowNo, 3)}</Row>;
+    // });
+
+    // li =
+    //   this.state.searchData &&
+    //   this.state.searchData.items &&
+    //   (() => {
+    //     return <Container>{rows}</Container>;
+    //   });
     body = (
       <div>
         <form method="POST" name="formName" onSubmit={this.onSubmit}>
@@ -101,7 +134,7 @@ class SearchBooks extends Component {
             <input type="text" name="searchTerm" onChange={this.handleChange} />
           </label>
         </form>
-        <ul className="list-unstyled">{li}</ul>
+        <div>{li}</div>
         {previousPage}
         {nextPage}
       </div>
@@ -112,3 +145,46 @@ class SearchBooks extends Component {
 }
 
 export default SearchBooks;
+{
+  /* <Row>
+          <Col xs={4}>1 of 3</Col>
+          <Col xs={4}>2 of 3 (wider)</Col>
+          <Col xs={4}>3 of 3</Col>
+        </Row>
+
+        <Row>
+          <Col xs={4}>1 of 3</Col>
+          <Col xs={4}>2 of 3 (wider)</Col>
+          <Col xs={4}>3 of 3</Col>
+        </Row>
+
+        <Row>
+          <Col xs={4}>1 of 3</Col>
+          <Col xs={4}>2 of 3 (wider)</Col>
+          <Col xs={4}>3 of 3</Col>
+        </Row>
+
+        <Row>
+          <Col xs={4}>1 of 3</Col>
+          <Col xs={4}>2 of 3 (wider)</Col>
+          <Col xs={4}>3 of 3</Col>
+        </Row>
+
+        <Row>
+          <Col xs={4}>1 of 3</Col>
+          <Col xs={4}>2 of 3 (wider)</Col>
+          <Col xs={4}>3 of 3</Col>
+        </Row>
+
+        <Row>
+          <Col xs={4}>1 of 3</Col>
+          <Col xs={4}>2 of 3 (wider)</Col>
+          <Col xs={4}>3 of 3</Col>
+        </Row>
+
+        <Row>
+          <Col xs={4}>1 of 3</Col>
+          <Col xs={4}>2 of 3 (wider)</Col>
+          <Col xs={4}>3 of 3</Col>
+        </Row> */
+}
