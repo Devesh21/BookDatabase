@@ -11,7 +11,7 @@ const BookCard = props => {
   return (
     <Col xs={6} md={4} lg={3}>
       <Card style={{ width: "16rem" }}>
-        <Card.Img variant="top" src={cover} alt="" />
+        <Card.Img variant="top" src={cover} alt="" style= {{width: "16rem", height: "20rem"}}/>
         <Card.Body>
           <Card.Title>
             <Link to={`/book/${props.book.id}`}>
