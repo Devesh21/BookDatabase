@@ -91,7 +91,7 @@ class SearchBooks extends Component {
   }
   render() {
     let body = null;
-    let li = null;
+    let bookCards = null;
     let nextPage;
     let previousPage;
     let currPage = this.state.page;
@@ -102,7 +102,7 @@ class SearchBooks extends Component {
       }
       nextPage = <Link to={`${parseInt(currPage) + 1}`}>Next</Link>;
     }
-    li =
+    bookCards =
       this.state.searchData &&
       this.state.searchData.items.map(book => {
         // let book = books.book;
@@ -134,7 +134,7 @@ class SearchBooks extends Component {
             <input type="text" name="searchTerm" onChange={this.handleChange} />
           </label>
         </form>
-        <div>{li}</div>
+        <Row>{bookCards}</Row>
         {previousPage}
         {nextPage}
       </div>

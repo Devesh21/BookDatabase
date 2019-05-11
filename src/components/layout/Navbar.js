@@ -8,11 +8,10 @@ import {
   Navbar,
   Nav,
   Form,
-  FormControl,
   Dropdown
 } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import Search from "./Search";
+// import Search from "./Search";
 
 const BookMasterNavbar = props => {
   const { auth, profile } = props;

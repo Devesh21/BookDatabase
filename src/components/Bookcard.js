@@ -9,18 +9,19 @@ const BookCard = props => {
   }
 
   return (
-    //style={{ width: "18rem" }}
-    <Card style={{ width: "18rem" }}>
-      <Card.Img variant="top" src={cover} alt="" />
-      <Card.Body>
-        <Card.Title>
-          <Link to={`/books/${props.book.id}`}>
-            {props.book.volumeInfo.title}
-          </Link>
-        </Card.Title>
-        <Card.Text>{props.book.volumeInfo.authors}</Card.Text>
-      </Card.Body>
-    </Card>
+    <Col xs={6} md={4} lg={3}>
+      <Card style={{ width: "16rem" }}>
+        <Card.Img variant="top" src={cover} alt="" />
+        <Card.Body>
+          <Card.Title>
+            <Link to={`/books/${props.book.id}`}>
+              {props.book.volumeInfo.title}
+            </Link>
+          </Card.Title>
+          <Card.Text>{props.book.volumeInfo.authors}</Card.Text>
+        </Card.Body>
+      </Card>
+    </Col>
     // <div className="card-style">
     //   <img src={props.book.volumeInfo.imageLinks.thumbnail} alt="" />
     //   <div>
