@@ -5,18 +5,18 @@ import {signOut} from "../../store/actions/authActions";
 
 const SignedInLinks = props => {
   return (
-    <ul className="right">
-      <li>
+    <ul className="right" style={{"padding-left": "10px"}}>
+      <li style={{"list-style": "none"}}>
         <NavLink to="/user" className="btn btn-info">
           {props.profile.firstName} {props.profile.lastName}
         </NavLink>
       </li>
-      <li>
+      <li style={{"list-style": "none"}}>
         <NavLink to="/addbook" onClick={props.signOut}>
           Add Book
         </NavLink>
       </li>
-      <li>
+      <li style={{"list-style": "none"}}>
         <NavLink to="/" onClick={props.signOut}>
           Log Out
         </NavLink>
