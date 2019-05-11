@@ -1,7 +1,7 @@
 export const createBook = (book) => {
     return (dispatch, getState, { getFirebase, getFirestore}) => {
-
-        //database calls
+        console.log(book);
+        
         const firestore = getFirestore();
         firestore.collection('books').add({
             ...book

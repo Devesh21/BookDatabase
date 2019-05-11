@@ -40,11 +40,11 @@ class Book extends Component {
               <h3>Comments</h3>
               {
                 comments.map(function (comment, index) {
-                  return <p>
+                  return <div>
                     <div>User: {comment[0]}</div>
                     <div>Rating: {comment[2]}</div>
                     <div>Comment: {comment[1]}</div>
-                  </p>
+                  </div>
                 })
               }
             </Col>

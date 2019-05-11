@@ -8,6 +8,12 @@ const bookReducer = (state = initState, action) => {
             console.log("book added : ", action.book);
             return state;
         
+        case 'CREATE_BOOK_ERROR':
+        return {
+            ...state,
+            bookError: action.err.message
+        }            
+            
         default:
             return state;
             
