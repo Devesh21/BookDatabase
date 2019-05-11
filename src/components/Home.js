@@ -18,9 +18,26 @@ class Home extends Component {
     this.setState({login: !this.state.login});
   }
 
-  render() {
+  rishtSide() {
     var text = this.state.login ? "Sign Up" : "Log In";
     var loginSignup = this.state.login ? <Login/> : <Signup/>;
+    if (this.props.auth.uid) {
+      return (
+        <Favourite/>
+      )
+    } else {
+      return (
+        <Col lg="3">
+          {loginSignup}
+          <Button block onClick={this.handleClick}>
+            {text}
+          </Button>
+        </Col>
+      )
+    }
+  }
+
+  render() {
     return (
       <Container className="Home" style={{"maxWidth": "100%"}}>
         <Row>
@@ -32,12 +49,7 @@ class Home extends Component {
               </div>
             </header>
           </Col>
-          <Col lg="3">
-            {loginSignup}
-            <Button block onClick={this.handleClick}>
-              {text}
-            </Button>
-          </Col>
+          {this.rishtSide()}
         </Row>
       </Container>
     )
