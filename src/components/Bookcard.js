@@ -9,12 +9,9 @@ const BookCard = props => {
   }
 
   return (
+    //style={{ width: "18rem" }}
     <Card style={{ width: "18rem" }}>
-      <Card.Img
-        variant="top"
-        src={cover}
-        alt=""
-      />
+      <Card.Img variant="top" src={cover} alt="" />
       <Card.Body>
         <Card.Title>
           <Link to={`/books/${props.book.id}`}>
