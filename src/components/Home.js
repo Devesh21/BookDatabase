@@ -43,7 +43,7 @@ class Home extends Component {
         <Row>
           <Col>
             <header className="App-header">
-              <div className="App-Title">
+              <div className="App-Title" >
                 <h1 className="App-title">Your partner in learning</h1>
                 <p>Find and read books of your choice!</p>
               </div>

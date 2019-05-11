@@ -37,7 +37,7 @@ class Signup extends Component {
     const { authError } = this.props;
 
     return (
-      <div className="Signup">
+      <div className="Signup" style={{ padding: "15px 0px"}}>
         <form onSubmit={this.handleSubmit}>
           <FormGroup controlId="firstName">
             <Form.Label style={{"float": "left"}}>First Name</Form.Label>

@@ -32,7 +32,7 @@ class Login extends Component {
   render() {
     const { authError } = this.props;
     return (
-      <div className="Login">
+      <div className="Login" style={{ padding: "15px 0px"}}>
         <form onSubmit={this.handleSubmit}>
           <FormGroup controlId="email">
             <Form.Label style={{"float" : "left"}}>Email address</Form.Label>

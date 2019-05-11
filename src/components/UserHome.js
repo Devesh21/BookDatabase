@@ -8,36 +8,39 @@ import { compose } from 'redux';
 
 class UserHome extends Component {
   render() {
-    const { auth } = this.props;
-
-    console.log("in userHome: ", this.props);
     
-    
-    if(!auth.uid){
-      return (<Redirect to="/"/>)
-    }
+        const { auth } = this.props;
 
-    var myBooks = ['MyBook1', 'MyBook2', 'MyBook3', "MyBook4", "MyBook5", "MyBook6"];
-    return (
-      <Container style={{"maxWidth": "100%"}}>
-        <Row>
-          <Col style={{"border": "solid"}}>
-            <h2>My Books</h2>
+        console.log("in userHome: ", this.props);
+
+
+        if(!auth.uid){
+          return (<Redirect to="/"/>)
+        }
+
+        var myBooks = ['MyBook1', 'MyBook2', 'MyBook3', "MyBook4", "MyBook5", "MyBook6"];
+        return (
+          <Container style={{"maxWidth": "90%", "font-family": "Comic Sans MS"}}>
             <Row>
-              {
-                myBooks.map(function (bookName, index) {
-                  return <Col xs={6} md={4} lg={3} key={index}>
-                    <img src={require("../image/BookCover.png")} alt="BookCover"/>
-                    {bookName}
-                  </Col>
-                })
-              }
+              <Col style={{"border": "solid"}}>
+                <h2 style = {{padding: "10px"}}>My Books</h2>
+                <Row style = {{padding: "10px", "font-size": " 30px"}}>
+                  {
+                    myBooks.map(function (bookName, index) {
+                      return <Col xs={6} md={4} lg={3} key={index}>
+                        <img src={require("../image/BookCover.png")} alt="BookCover"/>
+                        {bookName}
+                      </Col>
+                    })
+                  }
+                </Row>
+              </Col>
+              <Favourite/>
             </Row>
-          </Col>
-          <Favourite/>
-        </Row>
-      </Container>
-    )
+          </Container>
+    
+        )
+
   }
 }
 

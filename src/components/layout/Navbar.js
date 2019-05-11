@@ -31,7 +31,7 @@ const BookMasterNavbar = props => {
   //   );
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="dark" variant="dark">
       <Navbar.Brand>
         <Link to="/">BookMaster</Link>
       </Navbar.Brand>
@@ -51,7 +51,7 @@ const BookMasterNavbar = props => {
         <Form inline>
           {/* <FormControl type="text" placeholder="Search" className="mr-sm-2" /> */}
           <Link to="/Search/0">
-            <Button variant="outline-success">Search</Button>
+            <Button variant="outline-success" style={{"margin":"0px 10px"}}>Search</Button>
           </Link>
         </Form>
         {/* <Button>{links}</Button> */}
