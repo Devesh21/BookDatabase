@@ -51,7 +51,7 @@ const BookMasterNavbar = props => {
         </Nav>
         <Form inline>
           {/* <FormControl type="text" placeholder="Search" className="mr-sm-2" /> */}
-          <Link to="/Search">
+          <Link to="/Search/0">
             <Button variant="outline-success">Search</Button>
           </Link>
         </Form>
