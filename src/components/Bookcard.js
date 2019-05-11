@@ -3,12 +3,11 @@ import { Link } from "react-router-dom";
 import { Card, Container, Row, Col } from "react-bootstrap";
 
 const BookCard = props => {
-  var img = props.book.volumeInfo.imageLinks ? props.book.volumeInfo.imageLinks.thumbnail : "";
   return (
     <Card style={{ width: "18rem" }}>
       <Card.Img
         variant="top"
-        src={img}
+        src={props.book.volumeInfo.imageLinks.thumbnail}
         alt=""
       />
       <Card.Body>
