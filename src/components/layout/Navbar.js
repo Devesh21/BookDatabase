@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 import SignedInLinks from "./SignedInLinks";
 import SignedOutLinks from "./SignedOutLinks";
 import { connect } from "react-redux";
@@ -23,6 +23,11 @@ const BookMasterNavbar = props => {
   //       </div>
   //     </nav>
   //   );
+
+  var name = "Account";
+  if(auth.uid) {
+    name = String(props.profile.firstName).substring(0,1) + String(props.profile.lastName).substring(0,1);
+  }
 
   return (
     <Navbar bg="dark" variant="dark">
@@ -54,7 +59,7 @@ const BookMasterNavbar = props => {
       <br />
       <Dropdown roundedCircle>
         <Dropdown.Toggle variant="success" id="dropdown-basic">
-          Account
+          {name}
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
