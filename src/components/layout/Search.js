@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import Navbar from "./Navbar";
+// import Navbar from "./Navbar";
 import BookCard from "../Bookcard";
-import { Card, Container, Row, Col } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 
 class SearchBooks extends Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class SearchBooks extends Component {
   }
 
   componentDidMount() {
-    this.state.page = this.props.match.params.page;
+    this.setState({ page: this.props.match.params.page });
   }
 
   handleChange = e => {
@@ -36,7 +36,7 @@ class SearchBooks extends Component {
       let url = null;
       let api = "https://www.googleapis.com/books/v1/volumes/?q=";
       let page = this.state.page;
-      if (page == 0 || page == undefined) {
+      if (page === 0 || page === undefined) {
         url = api + this.state.searchTerm + "&startIndex=0&maxResults=20";
       } else {
         url =
@@ -145,8 +145,8 @@ class SearchBooks extends Component {
 }
 
 export default SearchBooks;
-{
-  /* <Row>
+
+/* <Row>
           <Col xs={4}>1 of 3</Col>
           <Col xs={4}>2 of 3 (wider)</Col>
           <Col xs={4}>3 of 3</Col>
@@ -187,4 +187,3 @@ export default SearchBooks;
           <Col xs={4}>2 of 3 (wider)</Col>
           <Col xs={4}>3 of 3</Col>
         </Row> */
-}
