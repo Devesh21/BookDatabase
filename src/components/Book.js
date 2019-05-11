@@ -25,7 +25,7 @@ class Book extends Component {
       ["user4", "comment4", "4"]
     ];
 
-    // console.log(this.props.auth);
+    console.log(this.props.match.params.id);
 
     if (!this.props.auth.uid) return <Redirect to="/" />;
 
@@ -52,7 +52,7 @@ class Book extends Component {
               <h3>Comments</h3>
               {comments.map(function(comment, index) {
                 return (
-                  <div>
+                  <div key={index}>
                     <div>User: {comment[0]}</div>
                     <div>Rating: {comment[2]}</div>
                     <div>Comment: {comment[1]}</div>

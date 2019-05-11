@@ -14,7 +14,7 @@ const BookCard = props => {
         <Card.Img variant="top" src={cover} alt="" />
         <Card.Body>
           <Card.Title>
-            <Link to={`/books/${props.book.id}`}>
+            <Link to={`/book/${props.book.id}`}>
               {props.book.volumeInfo.title}
             </Link>
           </Card.Title>
