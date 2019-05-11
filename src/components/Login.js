@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button, FormGroup, Form } from "react-bootstrap";
-import { connect } from 'react-redux';
-import { signIn } from '../../src/store/actions/authActions';
+import { connect } from "react-redux";
+import { signIn } from "../../src/store/actions/authActions";
 
 class Login extends Component {
   constructor(props) {
@@ -25,8 +25,9 @@ class Login extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    console.log(this.state);
+    console.log("In Login: ", this.state);
     this.props.signIn(this.state);
+    // this.props.history.push("/user");
   };
 
   render() {
@@ -35,7 +36,7 @@ class Login extends Component {
       <div className="Login" style={{ padding: "15px 0px"}}>
         <form onSubmit={this.handleSubmit}>
           <FormGroup controlId="email">
-            <Form.Label style={{"float" : "left"}}>Email address</Form.Label>
+            <Form.Label style={{ float: "left" }}>Email address</Form.Label>
             <Form.Control
               autoFocus
               value={this.state.email}
@@ -45,7 +46,7 @@ class Login extends Component {
             />
           </FormGroup>
           <FormGroup controlId="password">
-            <Form.Label style={{"float" : "left"}}>Password</Form.Label>
+            <Form.Label style={{ float: "left" }}>Password</Form.Label>
             <Form.Control
               value={this.state.password}
               onChange={this.handleChange}
@@ -53,32 +54,29 @@ class Login extends Component {
               placeholder="Password"
             />
           </FormGroup>
-          <Button
-            block
-            disabled={!this.validateForm()}
-            type="submit"
-          >
+          <Button block disabled={!this.validateForm()} type="submit">
             Log In
           </Button>
-          <div className="error">
-            { authError ? <p>{authError}</p> : null}
-          </div>
+          <div className="error">{authError ? <p>{authError}</p> : null}</div>
         </form>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     authError: state.auth.authError
-  }
+  };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    signIn: (credentials) => dispatch(signIn(credentials))
-  }
+    signIn: credentials => dispatch(signIn(credentials))
+  };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login);

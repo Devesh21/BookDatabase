@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { Card, Container, Row, Col } from "react-bootstrap";
+import { Card, Col } from "react-bootstrap";
 
 const BookCard = props => {
   let cover = require("../image/BookCover.png");
@@ -11,10 +11,15 @@ const BookCard = props => {
   return (
     <Col xs={6} md={4} lg={3}>
       <Card style={{ width: "16rem" }}>
-        <Card.Img variant="top" src={cover} alt="" />
+        <Card.Img
+          variant="top"
+          src={cover}
+          alt=""
+          style={{ width: "16rem", height: "20rem" }}
+        />
         <Card.Body>
           <Card.Title>
-            <Link to={`/books/${props.book.id}`}>
+            <Link to={`/book/${props.book.id}`}>
               {props.book.volumeInfo.title}
             </Link>
           </Card.Title>
