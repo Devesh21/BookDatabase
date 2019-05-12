@@ -43,8 +43,8 @@ const BookMasterNavbar = props => {
           <LinkContainer to="/user">
             <Nav.Link>User Home</Nav.Link>
           </LinkContainer>
-          <LinkContainer to="/book">
-            <Nav.Link>Book</Nav.Link>
+          <LinkContainer to="/addbook">
+            <Nav.Link>Add Book</Nav.Link>
           </LinkContainer>
         </Nav>
         <Form inline>
