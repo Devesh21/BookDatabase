@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 // import Navbar from "./Navbar";
 import BookCard from "../Bookcard";
 import { Row } from "react-bootstrap";
+import firebase from '../../config/firebaseConfig';
+const firestore = firebase.firestore();
 
 class SearchBooks extends Component {
   constructor(props) {
@@ -13,12 +15,24 @@ class SearchBooks extends Component {
       loading: false,
       searchTerm: undefined,
       searchData: undefined,
-      page: this.props.match.params.page
+      page: this.props.match.params.page,
+      books: {}
     };
   }
 
   componentDidMount() {
     this.setState({ page: this.props.match.params.page });
+    const books = [];
+    firestore.collection('books').get().then((snapshot)=> {
+      snapshot.docs.forEach(item => {
+        console.log(item.data());
+        books.push(item.data())
+      })
+    }).then(()=>{
+      this.setState({books});
+      console.log(this.state);
+    });
+        
   }
 
   handleChange = e => {
@@ -151,45 +165,3 @@ class SearchBooks extends Component {
 }
 
 export default SearchBooks;
-
-/* <Row>
-          <Col xs={4}>1 of 3</Col>
-          <Col xs={4}>2 of 3 (wider)</Col>
-          <Col xs={4}>3 of 3</Col>
-        </Row>
-
-        <Row>
-          <Col xs={4}>1 of 3</Col>
-          <Col xs={4}>2 of 3 (wider)</Col>
-          <Col xs={4}>3 of 3</Col>
-        </Row>
-
-        <Row>
-          <Col xs={4}>1 of 3</Col>
-          <Col xs={4}>2 of 3 (wider)</Col>
-          <Col xs={4}>3 of 3</Col>
-        </Row>
-
-        <Row>
-          <Col xs={4}>1 of 3</Col>
-          <Col xs={4}>2 of 3 (wider)</Col>
-          <Col xs={4}>3 of 3</Col>
-        </Row>
-
-        <Row>
-          <Col xs={4}>1 of 3</Col>
-          <Col xs={4}>2 of 3 (wider)</Col>
-          <Col xs={4}>3 of 3</Col>
-        </Row>
-
-        <Row>
-          <Col xs={4}>1 of 3</Col>
-          <Col xs={4}>2 of 3 (wider)</Col>
-          <Col xs={4}>3 of 3</Col>
-        </Row>
-
-        <Row>
-          <Col xs={4}>1 of 3</Col>
-          <Col xs={4}>2 of 3 (wider)</Col>
-          <Col xs={4}>3 of 3</Col>
-        </Row> */
