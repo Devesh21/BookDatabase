@@ -21,60 +21,6 @@ class AddBook extends Component {
     bookUid: ''
   }
 
-
-  // handleBookSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log("in submit: ");
-  //   const img = this.state.coverFile;
-  //       const coverUid = "cover-"+uuid();
-  //       console.log(img);
-  //       const upload = storage.ref(`covers/${coverUid}`).put(img);
-  //       upload.on('state_changed', 
-  //       (snapshot) => {
-  //         // progress function
-  //         // uncomment after adding the progressbar
-  //         // const progress = Math.round((snapshot.bytesTransferred/snapshot.totalBytes) * 100)
-  //         // this.setState({progress})
-  //         // console.log(this.state.progress);
-          
-  //       }, (error) => {
-  //         // error function
-  //         console.log(error);
-  //       }, () => {
-  //         // completed function
-  //         storage.ref('covers').child(coverUid).getDownloadURL().then(coverFile => {
-  //           this.setState({coverFile})
-  //           console.log(coverFile);
-  //           console.log(this.state);
-  //         })
-  //       });
-        
-  //       const book = this.state.bookFile;
-  //       console.log(book);
-  //       const bookuid = "book-"+uuid();
-  //       console.log(bookuid);
-  //       this.setState({bookuid});
-  //       const uploadBook = storage.ref(`books/${bookuid}`).put(book);
-  //       uploadBook.on('state_changed', 
-  //       (snapshot) => {
-  //           // progress function
-  //           // uncomment after adding the progressbar
-  //           // const progress = Math.round((snapshot.bytesTransferred/snapshot.totalBytes) * 100)
-  //           // this.setState({progress})
-  //           // console.log(this.state.progress);
-
-  //       }, (error) => {
-  //           // error function
-  //           console.log(error);
-  //       }, () => {
-  //           // completed function
-  //           storage.ref('books').child(bookuid).getDownloadURL().then(bookFile => {
-  //               this.setState({bookFile})
-  //               console.log(bookFile);
-  //               console.log(this.state);
-  //           })
-  //     });
-  // }
   
   handleCoverChange = (e) => {
     if(e.target.files[0]){
@@ -109,66 +55,49 @@ class AddBook extends Component {
   handleSubmit = (e) => {
       e.preventDefault();
 
-      console.log("in submit: ");
       const img = this.state.coverFile;
       const coverUid = "cover-"+uuid();
-      console.log(img);
+      this.setState({coverUid});
       const upload = storage.ref(`covers/${coverUid}`).put(img);
       upload.on('state_changed', 
-      (snapshot) => {
-        // progress function
-        // uncomment after adding the progressbar
-        // const progress = Math.round((snapshot.bytesTransferred/snapshot.totalBytes) * 100)
-        // this.setState({progress})
-        // console.log(this.state.progress);
-        
-      }, (error) => {
-        // error function
-        console.log(error);
-      }, () => {
-        // completed function
-        storage.ref('covers').child(coverUid).getDownloadURL().then(coverFile => {
-          this.setState({coverFile})
-          console.log(coverFile);
-          console.log(this.state);
-        })
-      });
-      
-      const book = this.state.bookFile;
-      console.log(book);
-      const bookuid = "book-"+uuid();
-      console.log(bookuid);
-      this.setState({bookuid});
-      const uploadBook = storage.ref(`books/${bookuid}`).put(book);
-      uploadBook.on('state_changed', 
-      (snapshot) => {
-          // progress function
-          // uncomment after adding the progressbar
-          // const progress = Math.round((snapshot.bytesTransferred/snapshot.totalBytes) * 100)
-          // this.setState({progress})
-          // console.log(this.state.progress);
+        (snapshot) => {
 
-      }, (error) => {
+        }, (error) => {
           // error function
           console.log(error);
-      }, () => {
+        }, () => {
           // completed function
-          storage.ref('books').child(bookuid).getDownloadURL().then(bookFile => {
-              this.setState({bookFile})
-              console.log(bookFile);
-              console.log(this.state);
-          })
-      });
+          storage.ref('covers').child(coverUid).getDownloadURL().then(coverFile => {
+            this.setState({coverFile})
+            // console.log(this.state);
+            
+            const book = this.state.bookFile;
+            const bookUid = "book-"+uuid();
+            this.setState({bookUid});
+            const uploadBook = storage.ref(`books/${bookUid}`).put(book);
+            uploadBook.on('state_changed', 
+            (snapshot) => {
+      
+            }, (error) => {
+                // error function
+                console.log(error);
+            }, () => {
+                // completed function
+                storage.ref('books').child(bookUid).getDownloadURL().then(bookFile => {
+                    this.setState({bookFile})
+                    console.log(this.state);
+                    this.props.createBook(this.state);
+                })
+            });
 
-      console.log(this.state);
-      // this.props.createBook(this.state);
+          })
+        });
+      
   }
 
 
 
   render() {
-
-    // console.log(this.state);
 
     return (
       <div className="AddBook" style={{"margin":"50px"}}>
@@ -192,8 +121,8 @@ class AddBook extends Component {
           <Form.Group >
             <Form.Label style={{"float": "left"}} >Select Book</Form.Label>
             <input type="file" id="bookFile" name="BookFile" style={{"position":"left", "display":"block", padding:"0 20px"}} onChange = {this.handleBookChange}/>
-            <Button style={{"position":"left", "display":"block", margin:"20px 0"}} onClick={this.handleBookSubmit}>Upload book and cover</Button>
-            <p style={{"border-left":"1rem solid #007bff", "backgroundColor":"white","text-align": "left", position:"left", width:"350px", padding:"10px"}}>please click upload before adding book , it will throw an file type error otherwise, that will be taken care of in some time</p>
+            {/* <Button style={{"position":"left", "display":"block", margin:"20px 0"}} onClick={this.handleBookSubmit}>Upload book and cover</Button>
+            <p style={{"border-left":"1rem solid #007bff", "backgroundColor":"white","text-align": "left", position:"left", width:"350px", padding:"10px"}}>please click upload before adding book , it will throw an file type error otherwise, that will be taken care of in some time</p> */}
           </Form.Group>
           <Button type="submit" style={{"position":"left", "display":"block", padding:"10px 20px", "clear":"both"}}>Add Book</Button>
         </form>

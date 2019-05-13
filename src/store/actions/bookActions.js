@@ -1,5 +1,7 @@
 export const createBook = (book) => {
     return (dispatch, getState, { getFirebase, getFirestore}) => {
+        console.log(" in actions : ");
+
         console.log(book);
         
         const firestore = getFirestore();
