@@ -171,7 +171,7 @@ class AddBook extends Component {
     // console.log(this.state);
 
     return (
-      <div className="AddBook">
+      <div className="AddBook" style={{"margin":"50px"}}>
         <form onSubmit={this.handleSubmit}>
           <FormGroup>
             <Form.Label style={{"float": "left"}}>Name</Form.Label>
@@ -187,15 +187,15 @@ class AddBook extends Component {
           </Form.Group>
           <Form.Group >
             <Form.Label style={{"float": "left"}} >Select Cover</Form.Label>
-            <input type="file" id="coverFile" name="CoverFile" onChange = {this.handleCoverChange}/>
+            <input type="file" id="coverFile" name="CoverFile" style={{"position":"left", "display":"block", padding:"0 20px"}} onChange = {this.handleCoverChange}/>
           </Form.Group>
           <Form.Group >
             <Form.Label style={{"float": "left"}} >Select Book</Form.Label>
-            <input type="file" id="bookFile" name="BookFile" onChange = {this.handleBookChange}/>
-            {/* <Button onClick={this.handleBookSubmit}>Upload book and cover</Button> */}
-            <p>please click upload before adding book , it will throw an file type error otherwise, that will be taken care of in some time</p>
+            <input type="file" id="bookFile" name="BookFile" style={{"position":"left", "display":"block", padding:"0 20px"}} onChange = {this.handleBookChange}/>
+            <Button style={{"position":"left", "display":"block", margin:"20px 0"}} onClick={this.handleBookSubmit}>Upload book and cover</Button>
+            <p style={{"border-left":"1rem solid #007bff", "backgroundColor":"white","text-align": "left", position:"left", width:"350px", padding:"10px"}}>please click upload before adding book , it will throw an file type error otherwise, that will be taken care of in some time</p>
           </Form.Group>
-          <Button type="submit">Add Book</Button>
+          <Button type="submit" style={{"position":"left", "display":"block", padding:"10px 20px", "clear":"both"}}>Add Book</Button>
         </form>
       </div>
     )

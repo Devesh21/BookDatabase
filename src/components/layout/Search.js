@@ -90,11 +90,13 @@ class SearchBooks extends Component {
     }
   }
   render() {
+    
     let body = null;
     let bookCards = null;
     let nextPage;
     let previousPage;
     let currPage = this.state.page;
+    
 
     if (this.state.searchData) {
       if (currPage > 0) {
@@ -109,6 +111,8 @@ class SearchBooks extends Component {
 
         return <BookCard key={book.id} book={book} />;
       });
+
+    
 
     // let cols = (rowNo, rowSize) => {
     //   this.bookItems(rowNo, rowSize).map(book => {
@@ -126,12 +130,14 @@ class SearchBooks extends Component {
     //     return <Container>{rows}</Container>;
     //   });
     body = (
-      <div>
+      <div style={{"padding":"10px", "margin":"20px"}}>
         <form method="POST" name="formName" onSubmit={this.onSubmit}>
           <label>
             {" "}
-            Search Term:
-            <input type="text" name="searchTerm" onChange={this.handleChange} />
+            <div style={{"backgroundColor":"#007bff", color:"white", "font-size":"20px"}}>
+                Search Here
+            </div>
+            <input style={{margin: "0", width: "400px", height:"50px"}}type="text" name="searchTerm" onChange={this.handleChange} />
           </label>
         </form>
         <Row>{bookCards}</Row>

@@ -20,7 +20,7 @@ class UserHome extends Component {
 
         var myBooks = ['MyBook1', 'MyBook2', 'MyBook3', "MyBook4", "MyBook5", "MyBook6"];
         return (
-          <Container style={{"maxWidth": "90%", "font-family": "Comic Sans MS"}}>
+          <Container style={{"maxWidth": "99%", margin: "10px","font-family": "Comic Sans MS"}}>
             <Row>
               <Col style={{"border": "solid"}}>
                 <h2 style = {{padding: "10px"}}>My Books</h2>
