@@ -10,9 +10,9 @@ class UserHome extends Component {
   render() {
     
         const { auth } = this.props;
+        const { books } = this.props;
 
-        console.log("in userHome: ", this.props);
-
+        console.log("in userHome: ", books);
 
         if(!auth.uid){
           return (<Redirect to="/"/>)
