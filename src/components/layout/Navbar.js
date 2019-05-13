@@ -3,7 +3,7 @@ import {Link, NavLink} from "react-router-dom";
 import SignedInLinks from "./SignedInLinks";
 import SignedOutLinks from "./SignedOutLinks";
 import { connect } from "react-redux";
-import { Button, Navbar, Nav, Form, Dropdown } from "react-bootstrap";
+import { Button, Navbar, Nav, Form, Dropdown, DropdownButton } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 // import Search from "./Search";
 
@@ -30,9 +30,9 @@ const BookMasterNavbar = props => {
   }
 
   return (
-    <Navbar bg="dark" variant="dark">
-      <Navbar.Brand>
-        <Link to="/">BookMaster</Link>
+    <Navbar bg="dark" variant="dark" style={{"padding":"10px 20px 10px 20px"}}>
+      <Navbar.Brand href="/">
+        {'BookMaster'}
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
@@ -47,18 +47,8 @@ const BookMasterNavbar = props => {
             <Nav.Link>Add Book</Nav.Link>
           </LinkContainer>
         </Nav>
-        <Form inline>
-          {/* <FormControl type="text" placeholder="Search" className="mr-sm-2" /> */}
-          <Link to="/Search/0">
-            <Button variant="outline-success" style={{"margin":"0px 10px"}}>Search</Button>
-          </Link>
-        </Form>
-        {/* <Button>{links}</Button> */}
-      </Navbar.Collapse>
-      <br />
-      <br />
-      <Dropdown roundedCircle>
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
+      <Dropdown style={{margin:"0px 0px 0px 0"}}>
+        <Dropdown.Toggle variant="primary" id="dropdown-basic">
           {name}
         </Dropdown.Toggle>
 
@@ -69,6 +59,19 @@ const BookMasterNavbar = props => {
           {links}
         </Dropdown.Menu>
       </Dropdown>
+        <Form inline>
+          {/* <FormControl type="text" placeholder="Search" className="mr-sm-2" /> */}
+          <Link to="/Search/0">
+            <Button variant="outline-light" style={{"margin":"0px 10px"}}>Search</Button>
+          </Link>
+        </Form>
+      
+        {/* <Button>{links}</Button> */}
+      </Navbar.Collapse>
+      <br />
+      <br />
+      
+      
     </Navbar>
   );
 };

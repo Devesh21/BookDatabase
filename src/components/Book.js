@@ -30,7 +30,7 @@ class Book extends Component {
     if (!this.props.auth.uid) return <Redirect to="/" />;
 
     return (
-      <Row>
+      <Row style={{ margin:"20px"}}>
         <Col style={{ border: "solid" }}>
           <Row className="BookDescription">
             <Col xs={12} md={3} lg={3}>

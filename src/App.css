@@ -9,9 +9,12 @@
 }
 
 .App-header {
-  background-image: url(./image/img.jpg);
-  height: 650px;
-  display: flex;
+  background-image: url(./image/home.jpg);
+  height: 869px;
+  width: 100%;
+  background-size:cover;
+  background-repeat: no-repeat;
+  display:inline-flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -25,7 +28,7 @@
 }
 
 .App-link {
-  color: yellow;
+  color: #61dafb;
 }
 
 .card-style {

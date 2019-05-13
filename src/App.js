@@ -10,6 +10,8 @@ import Book from "./components/Book.js";
 import NavBar from "./components/layout/Navbar";
 import Search from "./components/layout/Search";
 import AddBook from "./components/AddBook";
+import Signup from "./components/Signup.js";
+import Login from "./components/Login.js";
 
 class App extends Component {
   render() {
@@ -24,6 +26,8 @@ class App extends Component {
               <Route path="/book/:id" component={Book} />
               <Route path="/search/:page" component={Search} />
               <Route path="/addbook" component={AddBook} />
+              <Route path="/signup" component={Signup}/>
+              <Route path="/login" component={Login}/>
             </Switch>
           </div>
         </div>

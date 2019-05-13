@@ -42,7 +42,7 @@ class Home extends Component {
     }
 
     return (
-      <Container className="Home" style={{ maxWidth: "100%" }}>
+      <Container className="Home" style={{ maxWidth: "100%", "padding":"0px 15px 0px 0px"}}>
         <Row>
           <Col>
             <header className="App-header">
