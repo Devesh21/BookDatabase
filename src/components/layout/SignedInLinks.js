@@ -12,7 +12,7 @@ const SignedInLinks = props => {
         </NavLink>
       </li>
       <li style={{"list-style": "none"}}>
-        <NavLink to="/addbook" onClick={props.signOut}>
+        <NavLink to="/addbook" onClick={props.profile.lastName}>
           Add Book
         </NavLink>
       </li>
