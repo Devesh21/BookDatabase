@@ -2,7 +2,6 @@ export const createBook = (book) => {
     return (dispatch, getState, { getFirebase, getFirestore}) => {
         console.log(book);
         
-
         const firestore = getFirestore();
         firestore.collection('books').add({
             ...book
@@ -11,7 +10,6 @@ export const createBook = (book) => {
         }).catch((error) => {
             dispatch({ type: 'CREATE_BOOK_ERROR', error });
         })
-
 
     }
 }
