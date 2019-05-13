@@ -10,19 +10,7 @@ import { LinkContainer } from "react-router-bootstrap";
 const BookMasterNavbar = props => {
   const { auth, profile } = props;
   // console.log(auth);
-  const links = auth.uid ? (
-    <SignedInLinks profile={profile} />
-  ) : (
-    <SignedOutLinks />
-  );
-  //   return (
-  //     <nav>
-  //       <div className="container">
-  //         <Link to="/">Book Master</Link>
-  //         {links}
-  //       </div>
-  //     </nav>
-  //   );
+  const links = auth.uid ? <SignedInLinks profile={profile}/> : <SignedOutLinks/>;
 
   var name = "Account";
   if(auth.uid) {
@@ -37,12 +25,7 @@ const BookMasterNavbar = props => {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-          {/* <LinkContainer to="/">
-            <Nav.Link>{links}</Nav.Link>
-          </LinkContainer> */}
-          <LinkContainer to="/user">
-            <Nav.Link>User Home</Nav.Link>
-          </LinkContainer>
+          
           <LinkContainer to="/addbook">
             <Nav.Link>Add Book</Nav.Link>
           </LinkContainer>
@@ -53,14 +36,10 @@ const BookMasterNavbar = props => {
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-          {/* <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-          <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-          <Dropdown.Item href="#/action-3">Something else</Dropdown.Item> */}
           {links}
         </Dropdown.Menu>
       </Dropdown>
         <Form inline>
-          {/* <FormControl type="text" placeholder="Search" className="mr-sm-2" /> */}
           <Link to="/Search/0">
             <Button variant="outline-light" style={{"margin":"0px 10px"}}>Search</Button>
           </Link>
