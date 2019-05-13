@@ -18,7 +18,9 @@ class AddBook extends Component {
     coverFile: null,
     coverUid: '',
     bookFile: null,
-    bookUid: ''
+    bookUid: '',
+    progressCover: 0,
+    progressBook: 0
   }
 
   
@@ -61,6 +63,11 @@ class AddBook extends Component {
       const upload = storage.ref(`covers/${coverUid}`).put(img);
       upload.on('state_changed', 
         (snapshot) => {
+          // progress function :
+
+          const progressCover = Math.round((snapshot.bytesTransferred/snapshot.totalBytes) * 100)
+          this.setState({progressCover})
+          // console.log(this.state.progressCover);
 
         }, (error) => {
           // error function
@@ -77,6 +84,9 @@ class AddBook extends Component {
             const uploadBook = storage.ref(`books/${bookUid}`).put(book);
             uploadBook.on('state_changed', 
             (snapshot) => {
+              // progress function
+              const progressBook = Math.round((snapshot.bytesTransferred/snapshot.totalBytes) * 100)
+              this.setState({progressBook})
       
             }, (error) => {
                 // error function
@@ -87,6 +97,7 @@ class AddBook extends Component {
                     this.setState({bookFile})
                     console.log(this.state);
                     this.props.createBook(this.state);
+                    this.props.history.push('/');
                 })
             });
 
@@ -117,12 +128,12 @@ class AddBook extends Component {
           <Form.Group >
             <Form.Label style={{"float": "left"}} >Select Cover</Form.Label>
             <input type="file" id="coverFile" name="CoverFile" style={{"position":"left", "display":"block", padding:"0 20px"}} onChange = {this.handleCoverChange}/>
+            <progress value={this.state.progressCover} max="100"></progress>
           </Form.Group>
           <Form.Group >
             <Form.Label style={{"float": "left"}} >Select Book</Form.Label>
             <input type="file" id="bookFile" name="BookFile" style={{"position":"left", "display":"block", padding:"0 20px"}} onChange = {this.handleBookChange}/>
-            {/* <Button style={{"position":"left", "display":"block", margin:"20px 0"}} onClick={this.handleBookSubmit}>Upload book and cover</Button>
-            <p style={{"border-left":"1rem solid #007bff", "backgroundColor":"white","text-align": "left", position:"left", width:"350px", padding:"10px"}}>please click upload before adding book , it will throw an file type error otherwise, that will be taken care of in some time</p> */}
+            <progress value={this.state.progressBook} max="100"></progress>
           </Form.Group>
           <Button type="submit" style={{"position":"left", "display":"block", padding:"10px 20px", "clear":"both"}}>Add Book</Button>
         </form>
