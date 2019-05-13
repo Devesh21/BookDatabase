@@ -9,10 +9,10 @@ const bookReducer = (state = initState, action) => {
             return state;
         
         case 'CREATE_BOOK_ERROR':
-        return {
-            ...state,
-            bookError: action.err.message
-        }            
+            return {
+                ...state,
+                bookError: action.err.message
+            }            
             
         default:
             return state;
