@@ -42,11 +42,11 @@ class UserHome extends Component {
 
         var myBooks = ['MyBook1', 'MyBook2', 'MyBook3', "MyBook4", "MyBook5", "MyBook6"];
         return (
-          <Container style={{"maxWidth": "99%", margin: "10px","font-family": "Trebuchet MS"}}>
+          <Container style={{"maxWidth": "99%", margin: "10px","fontFamily": "Trebuchet MS"}}>
             <Row>
               <Col style={{"border": "solid"}}>
                 <h2 style = {{padding: "10px"}}>My Books</h2>
-                <Row style = {{padding: "10px", "font-size": " 30px"}}>
+                <Row style = {{padding: "10px", "fontSize": " 30px"}}>
                   {
                     myBooks.map(function (bookName, index) {
                       return <Col xs={6} md={4} lg={3} key={index}>
