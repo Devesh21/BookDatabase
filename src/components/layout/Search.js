@@ -65,38 +65,17 @@ class SearchBooks extends Component {
     } else return null;
   }
 
-  // bookItems(rowNo, rowSize) {
-  //   if (this.state.searchData != null && this.state.searchData.items != null) {
-  //     return this.state.searchData.items.filter((book, index) => {
-  //       let start = rowNo * rowSize;
-  //       let end = start + rowSize;
-  //       return index >= start && index < end;
-  //     });
-  //   }
-  //   return [];
-  // }
-
-  // getArray(n) {
-  //   let ret = [];
-  //   for (let i = 0; i < n; i++) {
-  //     ret.push(i);
-  //   }
-  //   return ret;
-  // }
-
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.match.params.page !== this.props.match.params.page) {
       this.searchBooks();
     }
   }
   render() {
-    
     let body = null;
     let bookCards = null;
     let nextPage;
     let previousPage;
     let currPage = this.state.page;
-    
 
     if (this.state.searchData) {
       if (currPage > 0) {
@@ -112,32 +91,26 @@ class SearchBooks extends Component {
         return <BookCard key={book.id} book={book} />;
       });
 
-    
-
-    // let cols = (rowNo, rowSize) => {
-    //   this.bookItems(rowNo, rowSize).map(book => {
-    //     return <Col xs={4}>{book.id}</Col>;
-    //   });
-    // };
-    // let rows = this.getArray(7).map(rowNo => {
-    //   return <Row>{cols(rowNo, 3)}</Row>;
-    // });
-
-    // li =
-    //   this.state.searchData &&
-    //   this.state.searchData.items &&
-    //   (() => {
-    //     return <Container>{rows}</Container>;
-    //   });
     body = (
-      <div style={{"padding":"10px", "margin":"20px"}}>
+      <div style={{ padding: "10px", margin: "20px" }}>
         <form method="POST" name="formName" onSubmit={this.onSubmit}>
           <label>
             {" "}
-            <div style={{"backgroundColor":"#007bff", color:"white", "font-size":"20px"}}>
-                Search Here
+            <div
+              style={{
+                backgroundColor: "#007bff",
+                color: "white",
+                "font-size": "20px"
+              }}
+            >
+              Search Here
             </div>
-            <input style={{margin: "0", width: "400px", height:"50px"}}type="text" name="searchTerm" onChange={this.handleChange} />
+            <input
+              style={{ margin: "0", width: "400px", height: "50px" }}
+              type="text"
+              name="searchTerm"
+              onChange={this.handleChange}
+            />
           </label>
         </form>
         <Row>{bookCards}</Row>
@@ -151,45 +124,3 @@ class SearchBooks extends Component {
 }
 
 export default SearchBooks;
-
-/* <Row>
-          <Col xs={4}>1 of 3</Col>
-          <Col xs={4}>2 of 3 (wider)</Col>
-          <Col xs={4}>3 of 3</Col>
-        </Row>
-
-        <Row>
-          <Col xs={4}>1 of 3</Col>
-          <Col xs={4}>2 of 3 (wider)</Col>
-          <Col xs={4}>3 of 3</Col>
-        </Row>
-
-        <Row>
-          <Col xs={4}>1 of 3</Col>
-          <Col xs={4}>2 of 3 (wider)</Col>
-          <Col xs={4}>3 of 3</Col>
-        </Row>
-
-        <Row>
-          <Col xs={4}>1 of 3</Col>
-          <Col xs={4}>2 of 3 (wider)</Col>
-          <Col xs={4}>3 of 3</Col>
-        </Row>
-
-        <Row>
-          <Col xs={4}>1 of 3</Col>
-          <Col xs={4}>2 of 3 (wider)</Col>
-          <Col xs={4}>3 of 3</Col>
-        </Row>
-
-        <Row>
-          <Col xs={4}>1 of 3</Col>
-          <Col xs={4}>2 of 3 (wider)</Col>
-          <Col xs={4}>3 of 3</Col>
-        </Row>
-
-        <Row>
-          <Col xs={4}>1 of 3</Col>
-          <Col xs={4}>2 of 3 (wider)</Col>
-          <Col xs={4}>3 of 3</Col>
-        </Row> */
