@@ -27,7 +27,7 @@ class Login extends Component {
     event.preventDefault();
     console.log("In Login: ", this.state);
     this.props.signIn(this.state);
-    // this.props.history.push("/user");
+    // this.props.history.push("/");
   };
 
   render() {

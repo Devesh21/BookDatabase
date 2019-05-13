@@ -5,14 +5,36 @@ import Favourite from "./Favourite.js";
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
+import firebase from '../config/firebaseConfig';
+const firestore = firebase.firestore();
+
 
 class UserHome extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      books: []
+    };
+  }
+
+  componentDidMount(){
+    const books = [];
+    firestore.collection('books').get().then((snapshot)=> {
+      snapshot.docs.forEach(item => {
+        console.log(item.data());
+        books.push(item.data())
+      })
+    }).then(()=>{
+      this.setState({books});
+      console.log(this.state);
+    });
+  }
+
   render() {
     
         const { auth } = this.props;
-        const { books } = this.props;
 
-        console.log("in userHome: ", books);
 
         if(!auth.uid){
           return (<Redirect to="/"/>)
