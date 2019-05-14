@@ -22,21 +22,21 @@ class AddBook extends Component {
 
   handleCoverChange = e => {
     if (e.target.files[0]) {
-      const coverFile = e.target.files[0].name;
+      const coverFile = e.target.files[0];
       //coverFile = coverFile + "";
       console.log(coverFile);
       this.state.coverFile = coverFile;
-      var ext = coverFile.split(".").pop();
+      // var ext = coverFile.split(".").pop();
       //var ext = this.state.coverFile.match(/\.([^\.]+)$/)[1];
-      switch (ext) {
-        case "jpg":
-        case "png":
-          alert("Allowed");
-          break;
-        default:
-          alert("Not allowed");
-          this.state.coverFile = "";
-      }
+      // switch (ext) {
+      //   case "jpg":
+      //   case "png":
+      //     alert("Allowed");
+      //     break;
+      //   default:
+      //     alert("Not allowed");
+      //     this.state.coverFile = "";
+      // }
       console.log(this.state);
     }
   };
@@ -126,6 +126,12 @@ class AddBook extends Component {
     );
   };
 
+  componentDidMount() {
+    const { auth } = this.props;
+    const uid = auth.uid;
+    this.state.uid = uid;
+  }
+
   render() {
     return (
       <div className="AddBook" style={{ margin: "50px" }}>
@@ -138,6 +144,7 @@ class AddBook extends Component {
               id="bookName"
               onChange={this.handleChange}
               placeholder="Name"
+              required
             />
           </FormGroup>
           <FormGroup>
@@ -147,6 +154,7 @@ class AddBook extends Component {
               id="author"
               onChange={this.handleChange}
               placeholder="Author"
+              required
             />
           </FormGroup>
           <Form.Group>
@@ -157,6 +165,7 @@ class AddBook extends Component {
               onChange={this.handleChange}
               rows="3"
               placeholder="Description"
+              required
             />
           </Form.Group>
           <Form.Group>
