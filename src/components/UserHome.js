@@ -20,19 +20,25 @@ class UserHome extends Component {
   }
 
   componentDidMount() {
+
+    const { auth } = this.props;
+    this.state.uid = auth.uid;
+
     const books = [];
     firestore
       .collection("books")
       .get()
       .then(snapshot => {
         snapshot.docs.forEach(item => {
-          console.log(item.data());
-          books.push(item.data());
+          if(item.data().uid == this.state.uid){
+            console.log(item.data().uid + " :stored: "+ this.state.uid);
+            books.push(item.data());
+          }
         });
       })
       .then(() => {
         this.setState({ books: books });
-        console.log("state of books:", this.state.books);
+        console.log("state of books:", this.state);
       });
   }
 
