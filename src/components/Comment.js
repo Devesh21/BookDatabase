@@ -1,20 +1,53 @@
 import React, { Component } from "react";
-import { Col, Row } from "react-bootstrap";
+//import { Col, Row } from "react-bootstrap";
+import { Button, Form, FormGroup } from "react-bootstrap";
 
 class Comment extends Component {
+  state = {
+    comment: null
+  };
+
+  handleChange = e => {
+    // console.log("in handle change");
+
+    this.setState({
+      [e.target.id]: e.target.value
+    });
+    console.log();
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+  };
   render() {
     return (
-      <Col lg="3" style={{ border: "solid", margin: "0px 10px" }}>
-        <h2>Post Comments</h2>
-        <Row>
-          {
-            // favouriteBooks.map(function (bookName, index) {
-            //   return <Col xs={6} md={4} lg={12} key={index}>{bookName}</Col>
-            <h2>Checking</h2>
-          }
-          {/* ) } */}
-        </Row>
-      </Col>
+      <div className="AddBook" style={{ margin: "50px" }}>
+        <form>
+          <FormGroup>
+            <Form.Label style={{ float: "left" }}>Comment</Form.Label>
+            <Form.Control
+              autoFocus
+              type="text"
+              id="Comments"
+              //   onChange={this.handleChange}
+              placeholder="Post Comments"
+              required
+            />
+          </FormGroup>
+
+          <Button
+            type="submit"
+            style={{
+              position: "left",
+              display: "block",
+              padding: "10px 20px",
+              clear: "both"
+            }}
+          >
+            Post
+          </Button>
+        </form>
+      </div>
     );
   }
 }

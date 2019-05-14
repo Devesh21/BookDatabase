@@ -169,9 +169,9 @@ class Book extends Component {
                   })}
                 </Col>
               </Row>
+              <Comments />
             </Col>
             <Favourite />
-            <Comments />
           </Row>
         </div>
       );
