@@ -6,6 +6,8 @@ import Comments from "./Comment.js";
 import { Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import firebase from "../config/firebaseConfig";
+const firestore = firebase.firestore();
 
 class Book extends Component {
   constructor(props) {
@@ -33,6 +35,38 @@ class Book extends Component {
     ret.volumeInfo.previewLink = book.bookFile;
 
     return ret;
+  }
+
+  addToFavourites = (e) => {
+    const bookId = this.props.match.params.id;
+    console.log("bookId: ",bookId);
+    const {auth} = this.props;
+    const uid = auth.uid;
+    console.log("userId: ", uid);
+    var favouriteBook;
+    let favouriteBooks = [];
+    firestore
+      .collection(`users`).doc(uid)
+      .get()
+      .then(snapshot => {
+          console.log(snapshot.data());
+          favouriteBook = snapshot.data().favouriteBooks;
+          console.log(favouriteBook);
+          // favouriteBooks.push(favouriteBook);
+          favouriteBook.push({bookId: bookId});
+          console.log(favouriteBook);
+          
+          firestore.collection('users').doc(uid).update({
+            "favouriteBooks" : favouriteBook
+          }).then(()=> {
+            console.log("updated!");
+          })
+      })
+      .then(() => {
+        // this.setState({ books: books });
+        console.log(favouriteBook);
+      });
+
   }
 
   async searchBookDetails() {
@@ -153,6 +187,7 @@ class Book extends Component {
                       Preview Book
                     </a>
                   </p>
+                  <button onClick={this.addToFavourites}>Add to favourites</button>
                 </Col>
               </Row>
               <Row className="Comments">
