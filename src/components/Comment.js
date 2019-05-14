@@ -6,7 +6,8 @@ const firestore = firebase.firestore();
 
 class Comment extends Component {
   state = {
-    comment: ""
+    comment: "",
+    uid: ""
   };
 
   handleChange = e => {
@@ -23,13 +24,30 @@ class Comment extends Component {
     console.log("in handle submit :");
     // console.log( this.props.bookDetails);
     const bookId = this.props.bookDetails;
+    const userId = this.props.userId;
+    this.state.uid = userId;
     console.log(this.state);
-    firestore.collection('comments').doc(bookId).set({comment : this.state.comment})
-    .then(()=>{
-      console.log("comment added!");
-    });
-    
+
+    var comm = [];
+    firestore
+      .collection('comments').doc(bookId).get()
+      .then(snapshot => {
+        if(snapshot.data()){
+          console.log(snapshot.data().comments);
+          snapshot.data().comments.forEach(element => {
+            comm.push(element);
+          });
+        }
+        comm.push(this.state);
+        firestore.collection('comments').doc(bookId).set({comments: comm});
+        console.log(comm);
+      })
+      .then(() => {
+        // this.setState({ books: books });
+        console.log("comment Added!!");
+      });
   };
+
   render() {
     return (
       <div className="AddBook" style={{ margin: "50px" }}>
