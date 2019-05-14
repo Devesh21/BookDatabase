@@ -35,7 +35,8 @@ class AddBook extends Component {
           break;
         default:
           alert("Not a Valid file type. Please select .jpg/.png format");
-          this.state.coverFile = "";
+          e.target.value = null;
+          this.state.coverFile = null;
       }
       console.log(this.state);
     }
