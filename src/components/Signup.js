@@ -29,7 +29,6 @@ class Signup extends Component {
     event.preventDefault();
     // console.log(this.state);
     this.props.signUp(this.state);
-    this.props.history.push("/user");
   };
 
   render() {
