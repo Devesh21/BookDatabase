@@ -108,6 +108,7 @@ class Book extends Component {
   render() {
 
     const bookId = this.props.match.params.id;
+    const {auth} = this.props;
 
     console.log("BookDetails:", this.props);
     let body = null;
@@ -207,7 +208,7 @@ class Book extends Component {
                   })}
                 </Col>
               </Row>
-              <Comments bookDetails={bookId}/>
+              <Comments bookDetails={bookId} userId={auth.uid}/>
             </Col>
             <Favourite />
           </Row>
