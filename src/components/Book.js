@@ -114,10 +114,11 @@ class Book extends Component {
                     <b>Rating:</b> {this.state.data.volumeInfo.averageRating}
                   </p>
                   <p>
-                    <b> Description:</b> {this.state.data.volumeInfo.subtitle}
+                    <b> Subtitle:</b> {this.state.data.volumeInfo.subtitle}
                   </p>
                   <p>
-                    <b> Description:</b> {this.state.data.volumeInfo.subtitle}
+                    <b> Description:</b>{" "}
+                    {this.state.data.volumeInfo.description}
                   </p>
                   <p>
                     <a href={this.state.data.volumeInfo.previewLink}>
