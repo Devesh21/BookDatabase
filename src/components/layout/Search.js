@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 // import Navbar from "./Navbar";
 import BookCard from "../Bookcard";
-import { Row } from "react-bootstrap";
+import { Row, Button } from "react-bootstrap";
 import firebase from "../../config/firebaseConfig";
 const firestore = firebase.firestore();
 
@@ -143,15 +143,25 @@ class SearchBooks extends Component {
   render() {
     let body = null;
     let bookCards = null;
-    let nextPage;
-    let previousPage;
+    let nextPage = null;
+    let previousPage = null;
     let currPage = this.state.page;
 
-    if (this.state.searchData) {
+    if (this.state.searchData && this.state.searchType === "Googlesearch") {
       if (currPage > 0) {
-        previousPage = <Link to={`${parseInt(currPage) - 1}`}>Previous</Link>;
+        previousPage = (
+          <Button variant="outline-primary">
+            {" "}
+            <Link to={`${parseInt(currPage) - 1}`}>Previous</Link>
+          </Button>
+        );
       }
-      nextPage = <Link to={`${parseInt(currPage) + 1}`}>Next</Link>;
+      if (currPage != null)
+        nextPage = (
+          <Button variant="outline-primary">
+            <Link to={`${parseInt(currPage) + 1}`}>Next</Link>
+          </Button>
+        );
     }
 
     bookCards =
@@ -201,9 +211,11 @@ class SearchBooks extends Component {
           />
           <label for="Googlesearch">Search Google Books</label>
         </form>
-        <Row>{bookCards}</Row>
         {previousPage}
+        &nbsp; &nbsp;
         {nextPage}
+        &nbsp; &nbsp; &nbsp;
+        <Row>{bookCards}</Row>
       </div>
     );
 
