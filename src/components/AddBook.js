@@ -23,20 +23,20 @@ class AddBook extends Component {
   handleCoverChange = e => {
     if (e.target.files[0]) {
       const coverFile = e.target.files[0];
-      //coverFile = coverFile + "";
+      const testcoverFile = e.target.files[0].name + "";
       console.log(coverFile);
       this.state.coverFile = coverFile;
-      // var ext = coverFile.split(".").pop();
-      //var ext = this.state.coverFile.match(/\.([^\.]+)$/)[1];
-      // switch (ext) {
-      //   case "jpg":
-      //   case "png":
-      //     alert("Allowed");
-      //     break;
-      //   default:
-      //     alert("Not allowed");
-      //     this.state.coverFile = "";
-      // }
+      var ext = testcoverFile.split(".").pop();
+      var ext = testcoverFile.match(/\.([^\.]+)$/)[1];
+      switch (ext) {
+        case "jpg":
+        case "png":
+          alert("Allowed");
+          break;
+        default:
+          alert("Not a Valid file type. Please select .jpg/.png format");
+          this.state.coverFile = "";
+      }
       console.log(this.state);
     }
   };
@@ -47,6 +47,19 @@ class AddBook extends Component {
       // console.log(bookFile);
       this.state.bookFile = bookFile;
       console.log(this.state);
+      const testbookFile = e.target.files[0].name + "";
+      console.log(bookFile);
+      this.state.bookFile = bookFile;
+      var ext = testbookFile.split(".").pop();
+      var ext = testbookFile.match(/\.([^\.]+)$/)[1];
+      switch (ext) {
+        case "pdf":
+          alert("Allowed");
+          break;
+        default:
+          alert("Not a Valid file type. Please select .pdf format");
+          this.state.coverFile = "";
+      }
     }
   };
 
@@ -174,7 +187,7 @@ class AddBook extends Component {
               type="file"
               id="coverFile"
               name="CoverFile"
-              accept=".image/*"
+              accept=".png, .jpg"
               style={{ position: "left", display: "block", padding: "0 20px" }}
               onChange={this.handleCoverChange}
             />
@@ -186,6 +199,7 @@ class AddBook extends Component {
               type="file"
               id="bookFile"
               name="BookFile"
+              accept=".pdf"
               style={{ position: "left", display: "block", padding: "0 20px" }}
               onChange={this.handleBookChange}
             />
