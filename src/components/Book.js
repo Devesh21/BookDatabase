@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Row, Col, Image } from "react-bootstrap";
 import axios from "axios";
 import Favourite from "./Favourite.js";
+import Comments from "./Comment.js";
 import { Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -170,6 +171,7 @@ class Book extends Component {
               </Row>
             </Col>
             <Favourite />
+            <Comments />
           </Row>
         </div>
       );
