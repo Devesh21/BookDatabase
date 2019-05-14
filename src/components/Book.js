@@ -39,6 +39,7 @@ class Book extends Component {
       loading: true
     });
 
+    console.log("Book props:", this.props);
     let url = null;
     if (
       this.props &&

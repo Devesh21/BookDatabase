@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 // import Navbar from "./Navbar";
 import BookCard from "../Bookcard";
 import { Row } from "react-bootstrap";
-import firebase from '../../config/firebaseConfig';
+import firebase from "../../config/firebaseConfig";
 const firestore = firebase.firestore();
 
 class SearchBooks extends Component {
@@ -23,28 +23,84 @@ class SearchBooks extends Component {
   componentDidMount() {
     this.setState({ page: this.props.match.params.page });
     const books = [];
-    firestore.collection('books').get().then((snapshot)=> {
-      snapshot.docs.forEach(item => {
-        console.log(item.data());
-        books.push(item.data())
+    firestore
+      .collection("books")
+      .get()
+      .then(snapshot => {
+        snapshot.docs.forEach(item => {
+          console.log(item.data());
+          books.push(item.data());
+        });
       })
-    }).then(()=>{
-      this.setState({books});
-      console.log(this.state);
-    });
-        
+      .then(() => {
+        this.setState({ books: books });
+        console.log(this.state);
+      });
   }
 
   handleChange = e => {
     let value = e.target.value;
-    this.setState({ searchTerm: value }, () => {
-      this.searchBooks();
+    this.triggerSearch(value);
+  };
+
+  triggerSearch(value) {
+    let val = value;
+    this.setState({ searchTerm: val }, () => {
+      if (this.state.searchType == "Googlesearch") this.searchBooks();
+      else this.searchDatabase();
+    });
+  }
+
+  handleChangeRadio = e => {
+    let value = e.target.value;
+    let val = this.state.searchTerm;
+    this.setState({ searchType: value }, () => {
+      this.triggerSearch(val);
     });
   };
 
   onSubmit(e) {
     e.preventDefault();
   }
+
+  transform(book) {
+    let ret = {};
+    // ret.original = book;
+    ret.id = book.bookUid;
+    ret.volumeInfo = {};
+    ret.volumeInfo.imageLinks = { thumbnail: book.coverFile };
+    ret.volumeInfo.title = book.bookName;
+    ret.volumeInfo.authors = [book.author];
+    ret.volumeInfo.averageRating = null;
+    ret.volumeInfo.subtitle = book.bookName;
+    ret.volumeInfo.description = book.description;
+    ret.volumeInfo.previewLink = book.bookFile;
+    ret.original = book;
+    console.log("ret:", ret);
+    return ret;
+  }
+  async searchDatabase() {
+    if (this.state.searchTerm) {
+      var bookList = this.state.books;
+      let results = {};
+      results.items = [];
+      results.original = [];
+      for (let i = 0; i < bookList.length; i++) {
+        if (bookList[i].bookName.indexOf(this.state.searchTerm) >= 0) {
+          //results.original[i] = bookList[i];
+          results.items[i] = this.transform(bookList[i]);
+        }
+      }
+      console.log("New DAta is", results);
+
+      try {
+        this.setState({ searchData: results });
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  }
+
   async searchBooks() {
     if (this.state.searchTerm) {
       let url = null;
@@ -62,7 +118,7 @@ class SearchBooks extends Component {
       }
       try {
         const response = await axios.get(url);
-        console.log(response);
+        console.log("Response", response);
         this.setState({ searchData: response.data });
       } catch (e) {
         console.log(e);
@@ -97,6 +153,7 @@ class SearchBooks extends Component {
       }
       nextPage = <Link to={`${parseInt(currPage) + 1}`}>Next</Link>;
     }
+
     bookCards =
       this.state.searchData &&
       this.state.searchData.items.map(book => {
@@ -126,6 +183,23 @@ class SearchBooks extends Component {
               onChange={this.handleChange}
             />
           </label>
+          <input
+            type="radio"
+            id="DBsearch"
+            name="searchType"
+            value="DBsearch"
+            onChange={this.handleChangeRadio}
+          />
+          <label for="DBsearch">Search BookMaster</label>
+
+          <input
+            type="radio"
+            id="Googlesearch"
+            name="searchType"
+            value="Googlesearch"
+            onChange={this.handleChangeRadio}
+          />
+          <label for="Googlesearch">Search Google Books</label>
         </form>
         <Row>{bookCards}</Row>
         {previousPage}

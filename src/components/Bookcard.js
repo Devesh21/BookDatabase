@@ -7,7 +7,7 @@ const BookCard = props => {
   if (props.book.volumeInfo.imageLinks) {
     cover = props.book.volumeInfo.imageLinks.thumbnail;
   }
-
+  console.log("props :", props);
   return (
     <Col xs={6} md={4} lg={3}>
       <Card style={{ width: "16rem" }}>
@@ -19,9 +19,19 @@ const BookCard = props => {
         />
         <Card.Body>
           <Card.Title>
-            <Link to={`/book/${props.book.id}`}>
+            <Link
+              to={{
+                pathname: `/book/${props.book.id}`,
+                state: {
+                  bookData: props.book.original
+                }
+              }}
+            >
               {props.book.volumeInfo.title}
             </Link>
+            {/* <Link to={`/book/${props.book.id}`}>
+              {props.book.volumeInfo.title}
+            </Link> */}
           </Card.Title>
           <Card.Text>{props.book.volumeInfo.authors}</Card.Text>
         </Card.Body>
