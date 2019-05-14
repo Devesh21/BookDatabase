@@ -106,6 +106,9 @@ class Book extends Component {
   }
 
   render() {
+
+    const bookId = this.props.match.params.id;
+
     console.log("BookDetails:", this.props);
     let body = null;
 
@@ -204,7 +207,7 @@ class Book extends Component {
                   })}
                 </Col>
               </Row>
-              <Comments />
+              <Comments bookDetails={bookId}/>
             </Col>
             <Favourite />
           </Row>
