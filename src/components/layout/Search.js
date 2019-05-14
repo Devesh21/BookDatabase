@@ -157,7 +157,7 @@ class SearchBooks extends Component {
                     color:"white", 
                     "text-decoration": "none", 
                     display:"block",
-                    "font-size":"30px"
+                    "font-size":"24px"
                 }} 
                 to={`${parseInt(currPage) - 1}`}>Previous</Link>
           </Button>
@@ -166,7 +166,7 @@ class SearchBooks extends Component {
       if (currPage != null)
         nextPage = (
           <Button variant="primary" size="lg">
-            <Link style={{color:"white", "text-decoration": "none", "font-size":"30px"}} to={`${parseInt(currPage) + 1}`}>Next</Link>
+            <Link style={{color:"white", "text-decoration": "none", "font-size":"24px"}} to={`${parseInt(currPage) + 1}`}>Next</Link>
           </Button>
         );
     }
@@ -251,7 +251,7 @@ class SearchBooks extends Component {
             style={{
                 position:"fixed", 
                 top:"50%", 
-                right:"30px"
+                right:"40px"
 
             }}>
             {nextPage}
