@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 // import Navbar from "./Navbar";
 import BookCard from "../Bookcard";
-import { Row, Button } from "react-bootstrap";
+import { Row, Button, ButtonToolbar, ToggleButtonGroup, ToggleButton } from "react-bootstrap";
 import firebase from "../../config/firebaseConfig";
 const firestore = firebase.firestore();
 
@@ -200,7 +200,7 @@ class SearchBooks extends Component {
               onChange={this.handleChange}
             />
           </label>
-          <div style={{display:"block"}}>
+{/*<div style={{display:"block"}}>
               <input
                 type="radio"
                 id="DBsearch"
@@ -218,7 +218,22 @@ class SearchBooks extends Component {
                 onChange={this.handleChangeRadio}
               />
               <label style={{margin:"0 10px"}} for="Googlesearch">Google Books</label>
-          </div>
+          </div> */}
+
+          <ButtonToolbar style={{display:"block"}}>
+            <ToggleButtonGroup type="radio" name="searchType" defaultValue="DBsearch">
+              <ToggleButton
+                id="DBsearch"
+                name="searchType"
+                value="DBsearch"
+                onClick={this.handleChangeRadio}>BookMaster</ToggleButton>
+              <ToggleButton 
+                id="Googlesearch"
+                name="searchType"
+                value="Googlesearch"
+                onClick={this.handleChangeRadio}>Google Books</ToggleButton>
+            </ToggleButtonGroup>
+          </ButtonToolbar>
         </form>
         
         <div style={{position:"relative", left:"13%", right:"7%"}}>
