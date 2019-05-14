@@ -1,30 +1,59 @@
 import React, { Component } from "react";
 import firebase from "../config/firebaseConfig";
+import { Col, Row } from "react-bootstrap";
 const firestore = firebase.firestore();
 
 class CommentsDisplay extends Component {
   state = {
-    comments: []
+    comments: [],
+    bookFromDatabase: false
   };
 
   componentDidMount() {
     const bId = this.props.bookDetails;
-    console.log("book-id is:", bId);
+    console.log(bId);
 
     firestore
       .collection("comments")
       .doc(bId)
       .get()
       .then(snapshots => {
-        console.log(snapshots.data().comments);
-        this.setState({ comments: snapshots.data().comments });
-        console.log(this.state);
+        if (snapshots.data()) {
+          this.setState({ bookFromDatabase: true });
+          // console.log(snapshots.data().comments);
+          this.setState({ comments: snapshots.data().comments });
+          console.log(this.state);
+        }
       });
   }
 
   render() {
-    const comments = this.state.comments;
-    return <div>display comments here!!</div>;
+    let comments = null;
+    let body = null;
+    if (this.state.bookFromDatabase) {
+      comments = this.state.comments;
+
+      body = (
+        <Col
+          className="Favourite"
+          lg="3"
+          //   style={{ border: "solid", margin: "0px 10px" }}
+        >
+          <Row>
+            {comments.map(function(item, index) {
+              return (
+                <Col xs={6} md={4} lg={12} key={index}>
+                  {"Comment " + (index + 1) + " : " + item.comment}
+                </Col>
+              );
+            })}
+          </Row>
+        </Col>
+      );
+    }
+
+    return body;
+    // <div>display comments here!!</div>;
   }
 }
 export default CommentsDisplay;

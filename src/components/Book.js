@@ -3,7 +3,7 @@ import { Row, Col, Image } from "react-bootstrap";
 import axios from "axios";
 import Favourite from "./Favourite.js";
 import Comments from "./Comment.js";
-import CommentsDisplay from "./CommentsDisplay.js";
+import CommentsDisplay from "./CommentsDisplay";
 import { Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -202,17 +202,8 @@ class Book extends Component {
               </Row>
               <Row className="Comments">
                 <Col style={{ textAlign: "left" }}>
-                  {/* <h3>Comments</h3>
-                  {comments.map(function(comment, index) {
-                    return (
-                      <div key={index}>
-                        <div>User: {comment[0]}</div>
-                        <div>Rating: {comment[2]}</div>
-                        <div>Comment: {comment[1]}</div>
-                      </div>
-                    );
-                  })} */}
-                  <CommentsDisplay />
+                  <h3>Comments</h3>
+                  <CommentsDisplay bookDetails={bookId} />
                 </Col>
               </Row>
               {/* <CommentsDisplay /> */}
