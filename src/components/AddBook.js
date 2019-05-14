@@ -189,6 +189,7 @@ class AddBook extends Component {
               id="coverFile"
               name="CoverFile"
               accept=".png, .jpg"
+              required
               style={{ position: "left", display: "block", padding: "0 20px" }}
               onChange={this.handleCoverChange}
             />
@@ -201,6 +202,7 @@ class AddBook extends Component {
               id="bookFile"
               name="BookFile"
               accept=".pdf"
+              required
               style={{ position: "left", display: "block", padding: "0 20px" }}
               onChange={this.handleBookChange}
             />
