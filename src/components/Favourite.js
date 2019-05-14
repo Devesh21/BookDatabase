@@ -1,5 +1,7 @@
 import React, {Component} from "react";
 import {Col, Row} from "react-bootstrap";
+import { connect } from "react-redux";
+
 
 class Favourite extends Component {
   render() {
@@ -21,4 +23,13 @@ class Favourite extends Component {
   }
 }
 
-export default Favourite;
+
+const mapStateToProps = state => {
+  console.log(state);
+  return {
+    auth: state.firebase.auth,
+    profile: state.firebase.profile
+  };
+};
+
+export default connect(mapStateToProps)(Favourite);
