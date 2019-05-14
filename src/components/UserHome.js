@@ -23,11 +23,11 @@ class UserHome extends Component {
     firestore.collection('books').get().then((snapshot)=> {
       snapshot.docs.forEach(item => {
         console.log(item.data());
-        books.push(item.data())
+        books.push(item.data());
       })
     }).then(()=>{
-      this.setState({books});
-      console.log(this.state);
+      this.setState({ books: books })
+      console.log(this.state.books);
     });
   }
 
@@ -40,7 +40,8 @@ class UserHome extends Component {
           return (<Redirect to="/"/>)
         }
 
-        var myBooks = ['MyBook1', 'MyBook2', 'MyBook3', "MyBook4", "MyBook5", "MyBook6"];
+        var bookList = this.state.books;
+
         return (
           <Container style={{"maxWidth": "99%", margin: "10px","fontFamily": "Trebuchet MS"}}>
             <Row>
@@ -48,10 +49,10 @@ class UserHome extends Component {
                 <h2 style = {{padding: "10px"}}>My Books</h2>
                 <Row style = {{padding: "10px", "fontSize": " 30px"}}>
                   {
-                    myBooks.map(function (bookName, index) {
-                      return <Col xs={6} md={4} lg={3} key={index}>
-                        <img src={require("../image/BookCover.png")} alt="BookCover"/>
-                        {bookName}
+                    Object.keys(bookList).map(function (book) {
+                      return <Col xs={6} md={4} lg={3} key={book} style={{"maxWidth": "50%"}}>
+                        <img src={bookList[book].coverFile} alt="BookCover"/>
+                        {bookList[book].bookName}
                       </Col>
                     })
                   }

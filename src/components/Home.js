@@ -48,7 +48,7 @@ class Home extends Component {
             <header className="App-header">
               <div className="App-Title" >
                 <h1 className="App-title">Your partner in learning</h1>
-                <p>Find and read books of your choice!</p>
+                <p>Find any book of your choice!</p>
               </div>
             </header>
           </Col>
