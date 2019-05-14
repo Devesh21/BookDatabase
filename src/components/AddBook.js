@@ -31,7 +31,7 @@ class AddBook extends Component {
       switch (ext) {
         case "jpg":
         case "png":
-          alert("Allowed");
+          // alert("Allowed");
           break;
         default:
           alert("Not a Valid file type. Please select .jpg/.png format");
@@ -55,7 +55,7 @@ class AddBook extends Component {
       var ext = testbookFile.match(/\.([^\.]+)$/)[1];
       switch (ext) {
         case "pdf":
-          alert("Allowed");
+          // alert("Allowed");
           break;
         default:
           alert("Not a Valid file type. Please select .pdf format");

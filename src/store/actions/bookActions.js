@@ -2,10 +2,10 @@ export const createBook = (book) => {
     return (dispatch, getState, { getFirebase, getFirestore}) => {
         console.log(" in actions : ");
 
-        console.log(book);
+        console.log(book.bookUid);
         
         const firestore = getFirestore();
-        firestore.collection('books').add({
+        firestore.collection('books').doc(book.bookUid).set({
             ...book
         }).then(()=> {
             dispatch({ type: 'CREATE_BOOK', book });
