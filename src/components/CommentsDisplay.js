@@ -6,7 +6,8 @@ const firestore = firebase.firestore();
 class CommentsDisplay extends Component {
 
     state = {
-        comments: []
+        comments: [],
+        bookFromDatabase: false
     }
 
     componentDidMount() {
@@ -15,16 +16,21 @@ class CommentsDisplay extends Component {
         
         firestore.collection('comments').doc(bId).get()
         .then((snapshots) => {
-            console.log(snapshots.data().comments);
-            this.setState({comments: snapshots.data().comments});
-            console.log(this.state);
-            
+            if(snapshots.data()){
+                this.setState({bookFromDatabase: true});
+                // console.log(snapshots.data().comments);
+                this.setState({comments: snapshots.data().comments});
+                console.log(this.state);
+            }
         })
     }
 
 
     render() {
-        const comments = this.state.comments;
+        if(this.state.bookFromDatabase){
+            const comments = this.state.comments;
+        }
+        
         return <div >
             display comments here!!
         </div>;
