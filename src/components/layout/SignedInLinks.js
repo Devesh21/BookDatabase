@@ -7,17 +7,17 @@ const SignedInLinks = props => {
   return (
     <ul className="right" style={{"paddingLeft": "10px"}}>
       <li style={{"listStyle": "none"}}>
-        <NavLink to="/user" className="btn btn-info">
+        <NavLink style={{"text-decoration": "none"}} to="/user" className="btn btn-info">
           {props.profile.firstName} {props.profile.lastName}
         </NavLink>
       </li>
       <li style={{"listStyle": "none"}}>
-        <NavLink to="/addbook" onClick={props.profile.lastName}>
+        <NavLink style={{"text-decoration": "none"}} to="/addbook" onClick={props.profile.lastName}>
           Add Book
         </NavLink>
       </li>
       <li style={{"listStyle": "none"}}>
-        <NavLink to="/" onClick={props.signOut}>
+        <NavLink style={{"text-decoration": "none"}} to="/" onClick={props.signOut}>
           Log Out
         </NavLink>
       </li>

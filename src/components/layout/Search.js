@@ -150,16 +150,23 @@ class SearchBooks extends Component {
     if (this.state.searchData && this.state.searchType === "Googlesearch") {
       if (currPage > 0) {
         previousPage = (
-          <Button variant="outline-primary">
+          <Button variant="primary" size="lg">
             {" "}
-            <Link to={`${parseInt(currPage) - 1}`}>Previous</Link>
+            <Link 
+                style={{
+                    color:"white", 
+                    "text-decoration": "none", 
+                    display:"block",
+                    "font-size":"30px"
+                }} 
+                to={`${parseInt(currPage) - 1}`}>Previous</Link>
           </Button>
         );
       }
       if (currPage != null)
         nextPage = (
-          <Button variant="outline-primary">
-            <Link to={`${parseInt(currPage) + 1}`}>Next</Link>
+          <Button variant="primary" size="lg">
+            <Link style={{color:"white", "text-decoration": "none", "font-size":"30px"}} to={`${parseInt(currPage) + 1}`}>Next</Link>
           </Button>
         );
     }
@@ -193,29 +200,47 @@ class SearchBooks extends Component {
               onChange={this.handleChange}
             />
           </label>
-          <input
-            type="radio"
-            id="DBsearch"
-            name="searchType"
-            value="DBsearch"
-            onChange={this.handleChangeRadio}
-          />
-          <label for="DBsearch">Search BookMaster</label>
-
-          <input
-            type="radio"
-            id="Googlesearch"
-            name="searchType"
-            value="Googlesearch"
-            onChange={this.handleChangeRadio}
-          />
-          <label for="Googlesearch">Search Google Books</label>
+          <div style={{display:"block"}}>
+              <input
+                type="radio"
+                id="DBsearch"
+                name="searchType"
+                value="DBsearch"
+                onChange={this.handleChangeRadio}
+              />
+              <label style={{margin:"0 10px"}} for="DBsearch">BookMaster</label>
+            
+              <input
+                type="radio"
+                id="Googlesearch"
+                name="searchType"
+                value="Googlesearch"
+                onChange={this.handleChangeRadio}
+              />
+              <label style={{margin:"0 10px"}} for="Googlesearch">Google Books</label>
+          </div>
         </form>
-        {previousPage}
-        &nbsp; &nbsp;
-        {nextPage}
-        &nbsp; &nbsp; &nbsp;
-        <Row>{bookCards}</Row>
+        
+        <div style={{position:"relative", left:"13%", right:"7%"}}>
+            <Row style={{"maxWidth":"80%", display: "flex", "align-items": "center", "justify-content": "center"}}>{bookCards}</Row>
+        </div>
+        <div 
+            style={{
+                position:"fixed", 
+                top:"50%", 
+                left:"30px"
+            }}>
+            {previousPage}
+        </div>
+        <div 
+            style={{
+                position:"fixed", 
+                top:"50%", 
+                right:"30px"
+
+            }}>
+            {nextPage}
+        </div>
       </div>
     );
 
