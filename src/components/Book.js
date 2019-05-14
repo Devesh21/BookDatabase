@@ -6,7 +6,8 @@ import Comments from "./Comment.js";
 import { Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-//import StarRatings from "react-star-ratings";
+import firebase from "../config/firebaseConfig";
+const firestore = firebase.firestore();
 
 class Book extends Component {
   constructor(props) {
@@ -35,6 +36,42 @@ class Book extends Component {
 
     return ret;
   }
+
+  addToFavourites = e => {
+    const bookId = this.props.match.params.id;
+    console.log("bookId: ", bookId);
+    const { auth } = this.props;
+    const uid = auth.uid;
+    console.log("userId: ", uid);
+    var favouriteBook;
+    let favouriteBooks = [];
+    firestore
+      .collection(`users`)
+      .doc(uid)
+      .get()
+      .then(snapshot => {
+        console.log(snapshot.data());
+        favouriteBook = snapshot.data().favouriteBooks;
+        console.log(favouriteBook);
+        // favouriteBooks.push(favouriteBook);
+        favouriteBook.push({ bookId: bookId });
+        console.log(favouriteBook);
+
+        firestore
+          .collection("users")
+          .doc(uid)
+          .update({
+            favouriteBooks: favouriteBook
+          })
+          .then(() => {
+            console.log("updated!");
+          });
+      })
+      .then(() => {
+        // this.setState({ books: books });
+        console.log(favouriteBook);
+      });
+  };
 
   async searchBookDetails() {
     this.setState({
@@ -73,6 +110,8 @@ class Book extends Component {
   }
 
   render() {
+    const bookId = this.props.match.params.id;
+
     console.log("BookDetails:", this.props);
     let body = null;
 
@@ -154,6 +193,9 @@ class Book extends Component {
                       Preview Book
                     </a>
                   </p>
+                  <button onClick={this.addToFavourites}>
+                    Add to favourites
+                  </button>
                 </Col>
               </Row>
               <Row className="Comments">
@@ -170,7 +212,7 @@ class Book extends Component {
                   })}
                 </Col>
               </Row>
-              <Comments />
+              <Comments bookDetails={bookId} />
             </Col>
             <Favourite />
           </Row>
