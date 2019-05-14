@@ -6,6 +6,7 @@ import Comments from "./Comment.js";
 import { Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+//import StarRatings from "react-star-ratings";
 
 class Book extends Component {
   constructor(props) {
