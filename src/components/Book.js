@@ -5,6 +5,7 @@ import Favourite from "./Favourite.js";
 import { Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+
 class Book extends Component {
   constructor(props) {
     super(props);
@@ -12,46 +13,64 @@ class Book extends Component {
     this.state = {
       data: undefined,
       loading: false
-      // name: "Sample Book",
-      // author: "Sample Author",
-      // description:
-      //   "Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab amet consectetur delectus, dolorem eligendi explicabo iste iusto laborum, laudantium maxime modi nostrum numquam obcaecati officiis quo, similique sint tempora?",
-      // rating: 5,
-      // image: "BookCover.png"
-    }; // the book's thumbnail needs to be pulled from the first page of the book's pdf
+    };
   }
 
   componentWillMount() {
     this.searchBookDetails();
   }
 
+  transform(book) {
+    let ret = {};
+    ret.volumeInfo = {};
+    ret.volumeInfo.imageLinks = { thumbnail: book.coverFile };
+    ret.volumeInfo.title = book.bookName;
+    ret.volumeInfo.authors = [book.author];
+    ret.volumeInfo.averageRating = null;
+    ret.volumeInfo.subtitle = book.bookName;
+    ret.volumeInfo.description = book.description;
+    ret.volumeInfo.previewLink = book.bookFile;
+
+    return ret;
+  }
+
   async searchBookDetails() {
     this.setState({
       loading: true
     });
+
     let url = null;
-    if (this.props.match.params.id) {
-      let api = "https://www.googleapis.com/books/v1/volumes/";
-      // let page = this.state.page;
-      // if (page === 0 || page === undefined) {
-      //   url = api + this.state.searchTerm + "&startIndex=0&maxResults=20";
-      // } else {
-      url = api + this.props.match.params.id;
-    }
-    try {
-      const response = await axios.get(url);
-      console.log(response);
-      this.setState({ data: response.data, loading: false });
-    } catch (e) {
-      console.log(e);
+    if (
+      this.props &&
+      this.props.location &&
+      this.props.location.state &&
+      this.props.location.state.bookData
+    ) {
+      let newData = this.transform(this.props.location.state.bookData);
       this.setState({
-        loading: false,
-        error: true
+        data: newData,
+        loading: false
       });
+    } else if (this.props.match.params.id) {
+      let api = "https://www.googleapis.com/books/v1/volumes/";
+      url = api + this.props.match.params.id;
+
+      try {
+        const response = await axios.get(url);
+        console.log(response);
+        this.setState({ data: response.data, loading: false });
+      } catch (e) {
+        console.log(e);
+        this.setState({
+          loading: false,
+          error: true
+        });
+      }
     }
   }
 
   render() {
+    console.log("BookDetails:", this.props);
     let body = null;
 
     var comments = [
@@ -62,6 +81,7 @@ class Book extends Component {
     ];
 
     console.log(this.props.match.params.id);
+    //console.log(this.props);
 
     if (!this.props.auth.uid) return <Redirect to="/" />;
 
@@ -84,6 +104,9 @@ class Book extends Component {
       img = (
         <img
           alt="BookCover"
+          width="260px"
+          height="300px"
+          style={{ padding: "8px" }}
           src={this.state.data.volumeInfo.imageLinks.thumbnail}
         />
       );
@@ -106,12 +129,15 @@ class Book extends Component {
                   {img}
                 </Col>
                 <Col style={{ textAlign: "left" }}>
-                  <h1>{this.state.data.volumeInfo.tite}</h1>
+                  <h1>{this.state.data.volumeInfo.title}</h1>
                   <p>
                     <b>Author:</b> {this.state.data.volumeInfo.authors}
                   </p>
                   <p>
-                    <b>Rating:</b> {this.state.data.volumeInfo.averageRating}
+                    <b>Rating:</b>{" "}
+                    {this.state.data.volumeInfo.averageRating
+                      ? this.state.data.volumeInfo.averageRating
+                      : "NA"}
                   </p>
                   <p>
                     <b> Subtitle:</b> {this.state.data.volumeInfo.subtitle}
