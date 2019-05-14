@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
 import Favourite from "./Favourite.js";
+import Comments from "./Comment.js";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
