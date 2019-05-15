@@ -20,7 +20,18 @@ class Book extends Component {
     };
   }
 
-  componentWillMount() {
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (prevState !== undefined && nextProps.match.params.id !== prevState.id) {
+      return { page: nextProps.match.params.id };
+    } else return null;
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.match.params.id !== this.props.match.params.id) {
+      this.searchBookDetails();
+    }
+  }
+  componentDidMount() {
     this.searchBookDetails();
   }
 
@@ -52,11 +63,11 @@ class Book extends Component {
       .get()
       .then(snapshot => {
         console.log(snapshot.data());
-        if(snapshot.data().favouriteBooks.length !== 0){
+        if (snapshot.data().favouriteBooks.length !== 0) {
           favouriteBook = snapshot.data().favouriteBooks;
         }
-          // console.log(favouriteBook);
-        favouriteBook.push({ bookId: bookId , bookTitle: bookTitle});
+        // console.log(favouriteBook);
+        favouriteBook.push({ bookId: bookId, bookTitle: bookTitle });
         // console.log(favouriteBook);
 
         firestore
