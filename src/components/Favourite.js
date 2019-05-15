@@ -27,6 +27,16 @@ class Favourite extends Component {
       });
   }
 
+  // matchfavBooks(id) {
+  //   let books = this.state.books;
+  //   if (books != null) {
+  //     for (let i = 0; i < books.length; i++) {
+  //       if (books[i].bookId == id) return books[i];
+  //     }
+  //   }
+  //   return null;
+  // }
+
   render() {
     let favourites = null;
     let body = null;
@@ -43,7 +53,15 @@ class Favourite extends Component {
           {this.state.favouritebooks.map(function(item, index) {
             return (
               <Col xs={6} md={4} lg={12} key={index}>
-                <Link to={"/book/" + item.bookId} key={index}>
+                <Link
+                  to={{
+                    pathname: `/book/${item.bookId}`,
+                    state: {
+                      bookData: this ? this.matchfavBooks(item.bookId) : null
+                    }
+                  }}
+                  key={index}
+                >
                   {item.bookTitle}
                 </Link>
               </Col>
