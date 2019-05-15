@@ -31,25 +31,34 @@ class CommentsDisplay extends Component {
     let comments = null;
     let body = null;
     if (this.state.bookFromDatabase) {
-      comments = this.state.comments;
+      if(this.state.comments){
+        comments = this.state.comments;
 
+        body = (
+          <Col
+            className="Favourite"
+            lg="3"
+            //   style={{ border: "solid", margin: "0px 10px" }}
+            >
+            <Row>
+              {comments.map(function(item, index) {
+                return (
+                  <Col xs={6} md={4} lg={12} key={index}>
+                    {"Comment " + (index + 1) + " : " + item.comment}
+                  </Col>
+                );
+              })}
+            </Row>
+          </Col>
+        );
+      }
+    } else {
       body = (
-        <Col
-          className="Favourite"
-          lg="3"
-          //   style={{ border: "solid", margin: "0px 10px" }}
-        >
-          <Row>
-            {comments.map(function(item, index) {
-              return (
-                <Col xs={6} md={4} lg={12} key={index}>
-                  {"Comment " + (index + 1) + " : " + item.comment}
-                </Col>
-              );
-            })}
-          </Row>
-        </Col>
-      );
+      <Col className="Favourite">
+        <Row>
+            No Comments Yet..!!
+        </Row>
+      </Col>)
     }
 
     return body;
