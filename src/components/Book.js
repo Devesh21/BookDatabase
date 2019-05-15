@@ -40,11 +40,12 @@ class Book extends Component {
 
   addToFavourites = e => {
     const bookId = this.props.match.params.id;
-    console.log("bookId: ", bookId);
+    console.log("bookId: ", this.state.data.volumeInfo.title);
+    const bookTitle = this.state.data.volumeInfo.title;
     const { auth } = this.props;
     const uid = auth.uid;
     console.log("userId: ", uid);
-    var favouriteBook;
+    var favouriteBook = [];
     let favouriteBooks = [];
     firestore
       .collection(`users`)
@@ -52,10 +53,12 @@ class Book extends Component {
       .get()
       .then(snapshot => {
         console.log(snapshot.data());
-        favouriteBook = snapshot.data().favouriteBooks;
-        console.log(favouriteBook);
+        if(snapshot.data().favouriteBooks.length != 0){
+          favouriteBook = snapshot.data().favouriteBooks;
+        }
+          // console.log(favouriteBook);
         // favouriteBooks.push(favouriteBook);
-        favouriteBook.push({ bookId: bookId });
+        favouriteBook.push({ bookId: bookId , bookTitle: bookTitle});
         console.log(favouriteBook);
 
         firestore
@@ -114,7 +117,7 @@ class Book extends Component {
     const bookId = this.props.match.params.id;
     const { auth } = this.props;
 
-    console.log("BookDetails:", this.props);
+    // console.log("BookDetails:", this.props);
     let body = null;
 
     var comments = [
@@ -124,7 +127,7 @@ class Book extends Component {
       ["user4", "comment4", "4"]
     ];
 
-    console.log(this.props.match.params.id);
+    // console.log(this.props.match.params.id);
     //console.log(this.props);
 
     if (!this.props.auth.uid) return <Redirect to="/" />;
