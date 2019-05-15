@@ -8,22 +8,40 @@ const firestore = firebase.firestore();
 
 class Favourite extends Component {
   state = {
-    favouritebooks: []
+    favouritebooks: [],
+    bookData: []
   };
 
   componentWillMount() {
     const { auth } = this.props;
     console.log("in favourite books: ", auth.uid);
     var favouriteBooksList;
-    firestore
-      .collection("users")
-      .doc(auth.uid)
-      .get()
+    let booksList;
+    var booksToMap = [];
+    firestore.collection("users").doc(auth.uid).get()
       .then(snapshot => {
         favouriteBooksList = snapshot.data().favouriteBooks;
         this.state.favouritebooks = favouriteBooksList;
-        console.log("fav books", this.state);
-        this.forceUpdate();
+        
+        // database call for fetching book details 
+        firestore.collection("books").get()
+        .then((books)=>{
+            booksList = books.docs;
+            favouriteBooksList.forEach(element => {
+              booksList.forEach(item => {
+                if(item.data().bookUid === element.bookId){
+                  booksToMap.push(item.data());
+                }
+              });
+          });
+          this.state.bookData = booksToMap;
+          console.log("list of required books: ", booksToMap);
+          console.log("fav books", this.state);
+
+          this.forceUpdate();
+        });
+        
+
       });
   }
 

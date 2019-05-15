@@ -27,7 +27,7 @@ class AddBook extends Component {
       console.log(coverFile);
       this.state.coverFile = coverFile;
       var ext = testcoverFile.split(".").pop();
-      var ext = testcoverFile.match(/\.([^\.]+)$/)[1];
+      ext = testcoverFile.match(/\.([^\.]+)$/)[1];
       switch (ext) {
         case "jpg":
         case "png":
@@ -52,7 +52,7 @@ class AddBook extends Component {
       console.log(bookFile);
       this.state.bookFile = bookFile;
       var ext = testbookFile.split(".").pop();
-      var ext = testbookFile.match(/\.([^\.]+)$/)[1];
+      ext = testbookFile.match(/\.([^\.]+)$/)[1];
       switch (ext) {
         case "pdf":
           // alert("Allowed");

@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
 import Favourite from "./Favourite.js";
-import Comments from "./Comment.js";
+// import Comments from "./Comment.js";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import firebase from "../config/firebaseConfig";
 import { Link } from "react-router-dom";
-import Book from "./Book";
+// import Book from "./Book";
 const firestore = firebase.firestore();
 
 class UserHome extends Component {
@@ -31,15 +31,15 @@ class UserHome extends Component {
       .get()
       .then(snapshot => {
         snapshot.docs.forEach(item => {
-          if(item.data().uid == this.state.uid){
-            console.log(item.data().uid + " :stored: "+ this.state.uid);
+          if(item.data().uid === this.state.uid){
+            // console.log(item.data().uid + " :stored: "+ this.state.uid);
             books.push(item.data());
           }
         });
       })
       .then(() => {
         this.setState({ books: books });
-        console.log("state of books:", this.state);
+        // console.log("state of books:", this.state);
       });
   }
 

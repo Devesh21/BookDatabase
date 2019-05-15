@@ -46,7 +46,7 @@ class SearchBooks extends Component {
   triggerSearch(value) {
     let val = value;
     this.setState({ searchTerm: val }, () => {
-      if (this.state.searchType == "Googlesearch") this.searchBooks();
+      if (this.state.searchType === "Googlesearch") this.searchBooks();
       else this.searchDatabase();
     });
   }
