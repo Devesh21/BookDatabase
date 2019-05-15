@@ -1,65 +1,86 @@
-import React, {Component} from "react";
-import {Col, Row} from "react-bootstrap";
+import React, { Component } from "react";
+import { Col, Row } from "react-bootstrap";
 import { connect } from "react-redux";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import firebase from "../config/firebaseConfig";
+import { isNull } from "util";
 const firestore = firebase.firestore();
 
 class Favourite extends Component {
-  state ={
+  state = {
     favouritebooks: []
-  }
+  };
 
   componentWillMount() {
     const { auth } = this.props;
     console.log("in favourite books: ", auth.uid);
     var favouriteBooksList;
-    firestore.collection('users').doc(auth.uid).get()
-    .then((snapshot)=>{
-      favouriteBooksList = snapshot.data().favouriteBooks;
-      this.state.favouritebooks = favouriteBooksList;
-      console.log(this.state);
-    })
+    firestore
+      .collection("users")
+      .doc(auth.uid)
+      .get()
+      .then(snapshot => {
+        favouriteBooksList = snapshot.data().favouriteBooks;
+        this.state.favouritebooks = favouriteBooksList;
+        console.log("fav books", this.state);
+        this.forceUpdate();
+      });
   }
 
-
   render() {
-    
-    var favouriteBooksList;
-    let booksList;
-    console.log("in render", this.state.favouritebooks);
-    if(this.state.favouritebooks.length != 0){
-      favouriteBooksList = this.state.favouritebooks;
-      booksList = favouriteBooksList.map(function(item, index){
-        return (<Link to={'/book/'+item.bookId} key={index}>
-          item.bookTitle
-        </Link>)
-      })
-      console.log("in fav still :");
-      
-      console.log(booksList);
-      
-    }
+    let favourites = null;
+    let body = null;
+    favourites = this.state.favouritebooks;
 
-
-    
-
-
-    return (
+    body = (
       <Col
         className="Favourite"
         lg="3"
         style={{ border: "solid", margin: "0px 10px" }}
       >
-        <h2>Favourite Books</h2>
+        {/* <div>sfdsfsfsfsdf</div> */}
         <Row>
-          display fav list here!!
+          {this.state.favouritebooks.map(function(item, index) {
+            return (
+              <Col xs={6} md={4} lg={12} key={index}>
+                <Link to={"/book/" + item.bookId} key={index}>
+                  {item.bookTitle}
+                </Link>
+              </Col>
+            );
+          })}
         </Row>
       </Col>
     );
+    console.log(body);
+    return body;
+    // console.log("in render", this.state.favouritebooks);
+    // if (this.state.favouritebooks.length != 0) {
+    //   favouriteBooksList = this.state.favouritebooks;
+    //   booksList = favouriteBooksList.favouritebooks.map(function(item, index) {
+    //     return (
+    //       <Link to={"/book/" + item.bookId} key={index}>
+    //         item.bookTitle
+    //       </Link>
+    //     );
+    //   });
+    //   console.log("in fav still :");
+
+    //   console.log(booksList);
+    // }
+
+    // return (
+    //   <Col
+    //     className="Favourite"
+    //     lg="3"
+    //     style={{ border: "solid", margin: "0px 10px" }}
+    //   >
+    //     <h2>Favourite Books</h2>
+    //     <Row>display fav list here!!</Row>
+    //   </Col>
+    // );
   }
 }
-
 
 const mapStateToProps = state => {
   // console.log(state);
