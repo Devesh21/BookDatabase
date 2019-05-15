@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { Row, Col, Image } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import axios from "axios";
 import Favourite from "./Favourite.js";
 import Comments from "./Comment.js";
 import CommentsDisplay from "./CommentsDisplay";
 import { Redirect } from "react-router-dom";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import firebase from "../config/firebaseConfig";
 const firestore = firebase.firestore();
@@ -40,26 +40,24 @@ class Book extends Component {
 
   addToFavourites = e => {
     const bookId = this.props.match.params.id;
-    console.log("bookId: ", this.state.data.volumeInfo.title);
+    // console.log("bookId: ", this.state.data.volumeInfo.title);
     const bookTitle = this.state.data.volumeInfo.title;
     const { auth } = this.props;
     const uid = auth.uid;
-    console.log("userId: ", uid);
+    // console.log("userId: ", uid);
     var favouriteBook = [];
-    let favouriteBooks = [];
     firestore
       .collection(`users`)
       .doc(uid)
       .get()
       .then(snapshot => {
         console.log(snapshot.data());
-        if(snapshot.data().favouriteBooks.length != 0){
+        if(snapshot.data().favouriteBooks.length !== 0){
           favouriteBook = snapshot.data().favouriteBooks;
         }
           // console.log(favouriteBook);
-        // favouriteBooks.push(favouriteBook);
         favouriteBook.push({ bookId: bookId , bookTitle: bookTitle});
-        console.log(favouriteBook);
+        // console.log(favouriteBook);
 
         firestore
           .collection("users")
@@ -68,12 +66,12 @@ class Book extends Component {
             favouriteBooks: favouriteBook
           })
           .then(() => {
-            console.log("updated!");
+            console.log("Added!");
           });
       })
       .then(() => {
         // this.setState({ books: books });
-        console.log(favouriteBook);
+        // console.log(favouriteBook);
       });
   };
 
@@ -119,13 +117,6 @@ class Book extends Component {
 
     // console.log("BookDetails:", this.props);
     let body = null;
-
-    var comments = [
-      ["user1", "comment1", "5"],
-      ["user2", "comment2", "4"],
-      ["user3", "comment3", "5"],
-      ["user4", "comment4", "4"]
-    ];
 
     // console.log(this.props.match.params.id);
     //console.log(this.props);
@@ -217,14 +208,12 @@ class Book extends Component {
         </div>
       );
     }
-    console.log(body);
+    // console.log(body);
     return body;
   }
 }
 
 const mapStateToProps = state => {
-  console.log(state);
-
   return {
     auth: state.firebase.auth,
     profile: state.firebase.profile
