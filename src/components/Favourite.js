@@ -8,8 +8,7 @@ const firestore = firebase.firestore();
 
 class Favourite extends Component {
   state = {
-    favouritebooks: [],
-    bookData: []
+    favouritebooks: []
   };
 
   componentWillMount() {
@@ -17,31 +16,36 @@ class Favourite extends Component {
     console.log("in favourite books: ", auth.uid);
     var favouriteBooksList;
     let booksList;
-    var booksToMap = [];
-    firestore.collection("users").doc(auth.uid).get()
+    //var booksToMap = {};
+    firestore
+      .collection("users")
+      .doc(auth.uid)
+      .get()
       .then(snapshot => {
         favouriteBooksList = snapshot.data().favouriteBooks;
         this.state.favouritebooks = favouriteBooksList;
-        
-        // database call for fetching book details 
-        firestore.collection("books").get()
-        .then((books)=>{
+
+        // database call for fetching book details
+        firestore
+          .collection("books")
+          .get()
+          .then(books => {
             booksList = books.docs;
             favouriteBooksList.forEach(element => {
               booksList.forEach(item => {
-                if(item.data().bookUid === element.bookId){
-                  booksToMap.push(item.data());
+                if (item.data().bookUid === element.bookId) {
+                  //booksToMap[element.bookId] = item.data();
+                  element.bookData = item.data();
                 }
               });
+            });
+            //this.state.bookData = booksToMap;
+            //console.log("list of required books: ", booksToMap);
+
+            console.log("fav books", this.state);
+
+            this.forceUpdate();
           });
-          this.state.bookData = booksToMap;
-          console.log("list of required books: ", booksToMap);
-          console.log("fav books", this.state);
-
-          this.forceUpdate();
-        });
-        
-
       });
   }
 
@@ -75,7 +79,7 @@ class Favourite extends Component {
                   to={{
                     pathname: `/book/${item.bookId}`,
                     state: {
-                      bookData: this ? this.matchfavBooks(item.bookId) : null
+                      bookData: item.bookData
                     }
                   }}
                   key={index}
