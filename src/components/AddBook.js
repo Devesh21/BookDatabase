@@ -24,7 +24,7 @@ class AddBook extends Component {
     if (e.target.files[0]) {
       const coverFile = e.target.files[0];
       const testcoverFile = e.target.files[0].name + "";
-      console.log(coverFile);
+      // console.log(coverFile);
       this.state.coverFile = coverFile;
       var ext = testcoverFile.split(".").pop();
       ext = testcoverFile.match(/\.([^\.]+)$/)[1];
@@ -38,7 +38,7 @@ class AddBook extends Component {
           e.target.value = null;
           this.state.coverFile = null;
       }
-      console.log(this.state);
+      // console.log(this.state);
     }
   };
 
@@ -47,9 +47,9 @@ class AddBook extends Component {
       const bookFile = e.target.files[0];
       // console.log(bookFile);
       this.state.bookFile = bookFile;
-      console.log(this.state);
+      // console.log(this.state);
       const testbookFile = e.target.files[0].name + "";
-      console.log(bookFile);
+      // console.log(bookFile);
       this.state.bookFile = bookFile;
       var ext = testbookFile.split(".").pop();
       ext = testbookFile.match(/\.([^\.]+)$/)[1];
@@ -129,7 +129,7 @@ class AddBook extends Component {
                   .getDownloadURL()
                   .then(bookFile => {
                     this.setState({ bookFile });
-                    console.log(this.state);
+                    // console.log(this.state);
                     this.props.createBook(this.state);
                     this.props.history.push("/");
                   });

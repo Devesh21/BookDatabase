@@ -7,7 +7,7 @@ const BookCard = props => {
   if (props.book.volumeInfo.imageLinks) {
     cover = props.book.volumeInfo.imageLinks.thumbnail;
   }
-  console.log("props :", props);
+  // console.log("props :", props);
   return (
     <Col xs={6} md={4} lg={3}>
       <Card style={{ width: "16rem" }}>

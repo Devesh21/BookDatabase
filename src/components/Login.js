@@ -25,7 +25,7 @@ class Login extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    console.log("In Login: ", this.state);
+    // console.log("In Login: ", this.state);
     this.props.signIn(this.state);
     // this.props.history.push("/");
   };

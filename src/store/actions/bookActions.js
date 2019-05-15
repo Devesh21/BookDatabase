@@ -1,8 +1,8 @@
 export const createBook = (book) => {
     return (dispatch, getState, { getFirebase, getFirestore}) => {
-        console.log(" in actions : ");
+        // console.log(" in actions : ");
 
-        console.log(book.bookUid);
+        // console.log(book.bookUid);
         
         const firestore = getFirestore();
         firestore.collection('books').doc(book.bookUid).set({

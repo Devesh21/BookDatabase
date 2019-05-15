@@ -62,7 +62,7 @@ class Book extends Component {
       .doc(uid)
       .get()
       .then(snapshot => {
-        console.log(snapshot.data());
+        // console.log(snapshot.data());
         if (snapshot.data().favouriteBooks.length !== 0) {
           favouriteBook = snapshot.data().favouriteBooks;
         }
@@ -91,7 +91,7 @@ class Book extends Component {
       loading: true
     });
 
-    console.log("Book props:", this.props);
+    // console.log("Book props:", this.props);
     let url = null;
     if (
       this.props &&
@@ -110,7 +110,7 @@ class Book extends Component {
 
       try {
         const response = await axios.get(url);
-        console.log(response);
+        // console.log(response);
         this.setState({ data: response.data, loading: false });
       } catch (e) {
         console.log(e);

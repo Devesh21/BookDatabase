@@ -13,7 +13,7 @@ class Favourite extends Component {
 
   componentWillMount() {
     const { auth } = this.props;
-    console.log("in favourite books: ", auth.uid);
+    // console.log("in favourite books: ", auth.uid);
     var favouriteBooksList;
     let booksList;
     //var booksToMap = {};
@@ -42,7 +42,7 @@ class Favourite extends Component {
             //this.state.bookData = booksToMap;
             //console.log("list of required books: ", booksToMap);
 
-            console.log("fav books", this.state);
+            // console.log("fav books", this.state);
 
             this.forceUpdate();
           });

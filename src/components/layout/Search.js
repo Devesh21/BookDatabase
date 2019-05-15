@@ -28,13 +28,13 @@ class SearchBooks extends Component {
       .get()
       .then(snapshot => {
         snapshot.docs.forEach(item => {
-          console.log(item.data());
+          // console.log(item.data());
           books.push(item.data());
         });
       })
       .then(() => {
         this.setState({ books: books });
-        console.log(this.state);
+        // console.log(this.state);
       });
   }
 
@@ -76,7 +76,7 @@ class SearchBooks extends Component {
     ret.volumeInfo.description = book.description;
     ret.volumeInfo.previewLink = book.bookFile;
     ret.original = book;
-    console.log("ret:", ret);
+    // console.log("ret:", ret);
     return ret;
   }
   async searchDatabase() {
@@ -91,7 +91,7 @@ class SearchBooks extends Component {
           results.items[i] = this.transform(bookList[i]);
         }
       }
-      console.log("New DAta is", results);
+      // console.log("New DAta is", results);
 
       try {
         this.setState({ searchData: results });
@@ -118,7 +118,7 @@ class SearchBooks extends Component {
       }
       try {
         const response = await axios.get(url);
-        console.log("Response", response);
+        // console.log("Response", response);
         this.setState({ searchData: response.data });
       } catch (e) {
         console.log(e);

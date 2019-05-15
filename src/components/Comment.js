@@ -11,36 +11,36 @@ class Comment extends Component {
   };
 
   handleChange = e => {
-    console.log("in handle change");
+    // console.log("in handle change");
 
     this.setState({
       [e.target.id]: e.target.value
     });
-    console.log(this.state);
+    // console.log(this.state);
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log("in handle submit :");
+    // console.log("in handle submit :");
     // console.log( this.props.bookDetails);
     const bookId = this.props.bookDetails;
     const userId = this.props.userId;
     this.state.uid = userId;
-    console.log(this.state);
+    // console.log(this.state);
 
     var comm = [];
     firestore
       .collection('comments').doc(bookId).get()
       .then(snapshot => {
         if(snapshot.data()){
-          console.log(snapshot.data().comments);
+          // console.log(snapshot.data().comments);
           snapshot.data().comments.forEach(element => {
             comm.push(element);
           });
         }
         comm.push(this.state);
         firestore.collection('comments').doc(bookId).set({comments: comm});
-        console.log(comm);
+        // console.log(comm);
       })
       .then(() => {
         // this.setState({ books: books });

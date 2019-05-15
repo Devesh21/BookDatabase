@@ -11,7 +11,7 @@ class CommentsDisplay extends Component {
 
   componentDidMount() {
     const bId = this.props.bookDetails;
-    console.log(bId);
+    // console.log(bId);
 
     firestore
       .collection("comments")
@@ -22,7 +22,7 @@ class CommentsDisplay extends Component {
           this.setState({ bookFromDatabase: true });
           // console.log(snapshots.data().comments);
           this.setState({ comments: snapshots.data().comments });
-          console.log(this.state);
+          // console.log(this.state);
         }
       });
   }
