@@ -53,12 +53,12 @@ class Book extends Component {
       .get()
       .then(snapshot => {
         console.log(snapshot.data());
-        if(snapshot.data().favouriteBooks.length != 0){
+        if (snapshot.data().favouriteBooks.length != 0) {
           favouriteBook = snapshot.data().favouriteBooks;
         }
-          // console.log(favouriteBook);
+        // console.log(favouriteBook);
         // favouriteBooks.push(favouriteBook);
-        favouriteBook.push({ bookId: bookId , bookTitle: bookTitle});
+        favouriteBook.push({ bookId: bookId, bookTitle: bookTitle });
         console.log(favouriteBook);
 
         firestore
