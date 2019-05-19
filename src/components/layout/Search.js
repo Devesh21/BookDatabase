@@ -188,7 +188,7 @@ class SearchBooks extends Component {
               style={{
                 backgroundColor: "#007bff",
                 color: "white",
-                "font-size": "20px"
+                "fontSize": "20px"
               }}
             >
               Search Here
@@ -237,7 +237,7 @@ class SearchBooks extends Component {
         </form>
         
         <div style={{position:"relative", left:"13%", right:"7%"}}>
-            <Row style={{"maxWidth":"80%", display: "flex", "align-items": "center", "justify-content": "center"}}>{bookCards}</Row>
+            <Row style={{"maxWidth":"80%", display: "flex", "alignItems": "center", "justifyContent": "center"}}>{bookCards}</Row>
         </div>
         <div 
             style={{
