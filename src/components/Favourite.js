@@ -3,7 +3,7 @@ import { Col, Row } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import firebase from "../config/firebaseConfig";
-import { isNull } from "util";
+//import { isNull } from "util";
 const firestore = firebase.firestore();
 
 class Favourite extends Component {
@@ -12,6 +12,15 @@ class Favourite extends Component {
   };
 
   componentWillMount() {
+    if (this.props.refreshParent) {
+      this.props.refreshParent.do = () => {
+        this.refreshFavs();
+      };
+    }
+    this.refreshFavs();
+  }
+
+  refreshFavs() {
     const { auth } = this.props;
     // console.log("in favourite books: ", auth.uid);
     var favouriteBooksList;
@@ -23,7 +32,7 @@ class Favourite extends Component {
       .get()
       .then(snapshot => {
         favouriteBooksList = snapshot.data().favouriteBooks;
-        this.state.favouritebooks = favouriteBooksList;
+        this.setState({ favouritebooks: favouriteBooksList }); //this.state.favouritebooks = ;
 
         // database call for fetching book details
         firestore
@@ -48,7 +57,6 @@ class Favourite extends Component {
           });
       });
   }
-
   // matchfavBooks(id) {
   //   let books = this.state.books;
   //   if (books != null) {

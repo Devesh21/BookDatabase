@@ -10,6 +10,13 @@ class CommentsDisplay extends Component {
   };
 
   componentDidMount() {
+    this.props.refreshParent.do = () => {
+      this.refreshComments();
+    };
+    this.refreshComments();
+  }
+
+  refreshComments() {
     const bId = this.props.bookDetails;
     // console.log(bId);
 
@@ -30,8 +37,9 @@ class CommentsDisplay extends Component {
   render() {
     let comments = null;
     let body = null;
+
     if (this.state.bookFromDatabase) {
-      if(this.state.comments){
+      if (this.state.comments) {
         comments = this.state.comments;
 
         body = (
@@ -39,7 +47,7 @@ class CommentsDisplay extends Component {
             className="Favourite"
             lg="3"
             //   style={{ border: "solid", margin: "0px 10px" }}
-            >
+          >
             <Row>
               {comments.map(function(item, index) {
                 return (
@@ -54,11 +62,10 @@ class CommentsDisplay extends Component {
       }
     } else {
       body = (
-      <Col className="Favourite">
-        <Row>
-            No Comments Yet..!!
-        </Row>
-      </Col>)
+        <Col className="Favourite">
+          <Row>No Comments Yet..!!</Row>
+        </Col>
+      );
     }
 
     return body;

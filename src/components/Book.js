@@ -67,18 +67,21 @@ class Book extends Component {
           favouriteBook = snapshot.data().favouriteBooks;
         }
         // console.log(favouriteBook);
-        favouriteBook.push({ bookId: bookId, bookTitle: bookTitle });
-        // console.log(favouriteBook);
+        if (!this.isAlreadyFav(bookId, favouriteBook)) {
+          favouriteBook.push({ bookId: bookId, bookTitle: bookTitle });
+          // console.log(favouriteBook);
 
-        firestore
-          .collection("users")
-          .doc(uid)
-          .update({
-            favouriteBooks: favouriteBook
-          })
-          .then(() => {
-            console.log("Added!");
-          });
+          firestore
+            .collection("users")
+            .doc(uid)
+            .update({
+              favouriteBooks: favouriteBook
+            })
+            .then(() => {
+              console.log("Added!");
+              this.refreshFavs.do();
+            });
+        }
       })
       .then(() => {
         // this.setState({ books: books });
@@ -86,6 +89,18 @@ class Book extends Component {
       });
   };
 
+  isAlreadyFav(bookId, favouriteBooks) {
+    for (let i = 0; i < favouriteBooks.length; i++) {
+      if (favouriteBooks[i].bookId == bookId) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  async refreshView() {
+    return true;
+  }
   async searchBookDetails() {
     this.setState({
       loading: true
@@ -100,6 +115,7 @@ class Book extends Component {
       this.props.location.state.bookData
     ) {
       let newData = this.transform(this.props.location.state.bookData);
+      await this.refreshView();
       this.setState({
         data: newData,
         loading: false
@@ -122,8 +138,20 @@ class Book extends Component {
     }
   }
 
+  refreshCallback = () => {
+    this.refreshComment.do();
+  };
+
+  refreshComment = {
+    do: null
+  };
+
+  refreshFavs = {
+    do: null
+  };
+
   render() {
-    const bookId = this.props.match.params.id;
+    let bookId = this.props.match.params.id;
     const { auth } = this.props;
 
     // console.log("BookDetails:", this.props);
@@ -208,13 +236,20 @@ class Book extends Component {
               <Row className="Comments">
                 <Col style={{ textAlign: "left" }}>
                   <h3>Comments</h3>
-                  <CommentsDisplay bookDetails={bookId} />
+                  <CommentsDisplay
+                    bookDetails={bookId}
+                    refreshParent={this.refreshComment}
+                  />
                 </Col>
               </Row>
               {/* <CommentsDisplay /> */}
-              <Comments bookDetails={bookId} userId={auth.uid} />
+              <Comments
+                bookDetails={bookId}
+                userId={auth.uid}
+                refreshParent={this.refreshCallback}
+              />
             </Col>
-            <Favourite />
+            <Favourite refreshParent={this.refreshFavs} />
           </Row>
         </div>
       );
