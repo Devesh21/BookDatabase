@@ -2,7 +2,7 @@ import React, { Component } from "react";
 //import { Col, Row } from "react-bootstrap";
 import { Button, Form, FormGroup } from "react-bootstrap";
 import firebase from "../config/firebaseConfig";
-import CommentsDisplay from "./CommentsDisplay";
+// import CommentsDisplay from "./CommentsDisplay";
 const firestore = firebase.firestore();
 
 class Comment extends Component {

@@ -68,9 +68,9 @@ class Favourite extends Component {
   // }
 
   render() {
-    let favourites = null;
+    // let favourites = null;
+    // favourites = this.state.favouritebooks;
     let body = null;
-    favourites = this.state.favouritebooks;
 
     body = (
       <Col

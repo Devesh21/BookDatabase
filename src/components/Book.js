@@ -91,7 +91,7 @@ class Book extends Component {
 
   isAlreadyFav(bookId, favouriteBooks) {
     for (let i = 0; i < favouriteBooks.length; i++) {
-      if (favouriteBooks[i].bookId == bookId) {
+      if (favouriteBooks[i].bookId === bookId) {
         return true;
       }
     }
