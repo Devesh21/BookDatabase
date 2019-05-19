@@ -2,7 +2,8 @@ import React, { Component } from "react";
 //import { Col, Row } from "react-bootstrap";
 import { Button, Form, FormGroup } from "react-bootstrap";
 import firebase from "../config/firebaseConfig";
-import CommentsDisplay from "./CommentsDisplay";
+//import { auth } from "firebase";
+//import CommentsDisplay from "./CommentsDisplay";
 const firestore = firebase.firestore();
 
 class Comment extends Component {
@@ -27,7 +28,8 @@ class Comment extends Component {
     const bookId = this.props.bookDetails;
     const userId = this.props.userId;
     let refreshParent = this.props.refreshParent;
-    this.state.uid = userId;
+    //this.state.uid = userId;
+    this.setState({ uid: userId });
     // console.log(this.state);
 
     var comm = [];

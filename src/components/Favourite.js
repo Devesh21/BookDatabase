@@ -48,29 +48,16 @@ class Favourite extends Component {
                 }
               });
             });
-            //this.state.bookData = booksToMap;
-            //console.log("list of required books: ", booksToMap);
-
-            // console.log("fav books", this.state);
 
             this.forceUpdate();
           });
       });
   }
-  // matchfavBooks(id) {
-  //   let books = this.state.books;
-  //   if (books != null) {
-  //     for (let i = 0; i < books.length; i++) {
-  //       if (books[i].bookId == id) return books[i];
-  //     }
-  //   }
-  //   return null;
-  // }
 
   render() {
-    let favourites = null;
+    // let favourites = null;
     let body = null;
-    favourites = this.state.favouritebooks;
+    //  favourites = this.state.favouritebooks;
 
     body = (
       <Col
@@ -102,31 +89,6 @@ class Favourite extends Component {
     );
     console.log(body);
     return body;
-    // console.log("in render", this.state.favouritebooks);
-    // if (this.state.favouritebooks.length != 0) {
-    //   favouriteBooksList = this.state.favouritebooks;
-    //   booksList = favouriteBooksList.favouritebooks.map(function(item, index) {
-    //     return (
-    //       <Link to={"/book/" + item.bookId} key={index}>
-    //         item.bookTitle
-    //       </Link>
-    //     );
-    //   });
-    //   console.log("in fav still :");
-
-    //   console.log(booksList);
-    // }
-
-    // return (
-    //   <Col
-    //     className="Favourite"
-    //     lg="3"
-    //     style={{ border: "solid", margin: "0px 10px" }}
-    //   >
-    //     <h2>Favourite Books</h2>
-    //     <Row>display fav list here!!</Row>
-    //   </Col>
-    // );
   }
 }
 

@@ -25,7 +25,8 @@ class AddBook extends Component {
       const coverFile = e.target.files[0];
       const testcoverFile = e.target.files[0].name + "";
       // console.log(coverFile);
-      this.state.coverFile = coverFile;
+      // this.state.coverFile = coverFile;
+      this.setState({ coverFile: coverFile });
       var ext = testcoverFile.split(".").pop();
       ext = testcoverFile.match(/\.([^\.]+)$/)[1];
       switch (ext) {
@@ -36,7 +37,8 @@ class AddBook extends Component {
         default:
           alert("Not a Valid file type. Please select .jpg/.png format");
           e.target.value = null;
-          this.state.coverFile = null;
+          // this.state.coverFile = null;
+          this.setState({ coverFile: null });
       }
       // console.log(this.state);
     }
@@ -46,11 +48,13 @@ class AddBook extends Component {
     if (e.target.files[0]) {
       const bookFile = e.target.files[0];
       // console.log(bookFile);
-      this.state.bookFile = bookFile;
+      //this.state.bookFile = bookFile;
+      this.setState({ bookFile: bookFile });
       // console.log(this.state);
       const testbookFile = e.target.files[0].name + "";
       // console.log(bookFile);
-      this.state.bookFile = bookFile;
+      // this.state.bookFile = bookFile;
+      this.setState({ bookFile: bookFile });
       var ext = testbookFile.split(".").pop();
       ext = testbookFile.match(/\.([^\.]+)$/)[1];
       switch (ext) {
@@ -59,7 +63,8 @@ class AddBook extends Component {
           break;
         default:
           alert("Not a Valid file type. Please select .pdf format");
-          this.state.coverFile = "";
+          // this.state.coverFile = "";
+          this.setState({ coverFile: "" });
       }
     }
   };
@@ -143,7 +148,8 @@ class AddBook extends Component {
   componentDidMount() {
     const { auth } = this.props;
     const uid = auth.uid;
-    this.state.uid = uid;
+    // this.state.uid = uid;
+    this.setState({ uid: uid });
   }
 
   render() {

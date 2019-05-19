@@ -21,9 +21,9 @@ class UserHome extends Component {
   }
 
   componentDidMount() {
-
     const { auth } = this.props;
-    this.state.uid = auth.uid;
+    //this.state.uid = auth.uid;
+    this.setState({ uid: auth.uid });
 
     const books = [];
     firestore
@@ -31,7 +31,7 @@ class UserHome extends Component {
       .get()
       .then(snapshot => {
         snapshot.docs.forEach(item => {
-          if(item.data().uid === this.state.uid){
+          if (item.data().uid === this.state.uid) {
             // console.log(item.data().uid + " :stored: "+ this.state.uid);
             books.push(item.data());
           }
